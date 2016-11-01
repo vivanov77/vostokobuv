@@ -1,0 +1,29 @@
+<h1 class="page-header">Разделы</h1>
+
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Номер (для сортировки)</th>       
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @component_types.each do |component_type| %>
+      <tr>
+        <td><%= component_type.title %></td>
+        <td><%= component_type.number %></td>
+        <td><%= link_to 'Показать', [:admin, component_type] %></td>
+        <td><%= link_to 'Редактировать', edit_admin_component_type_path(component_type) %></td>
+        <td><%= link_to 'Удалить', [:admin, component_type], method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<%= link_to 'Новый раздел', new_admin_component_type_path %>

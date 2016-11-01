@@ -1,0 +1,30 @@
+<%= form_for([:admin, component_category_value]) do |f| %>
+  <% if component_category_value.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(component_category_value.errors.count, "error") %> prohibited this component_category_value from being saved:</h2>
+
+      <ul>
+      <% component_category_value.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Наименование" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+  <!-- http://stackoverflow.com/questions/5319400/want-to-find-records-with-no-associated-records-in-rails-3 -->
+    <%= f.label "Подраздел: Комплектующие" %><br />
+      <%= f.grouped_collection_select(:component_category_type_id, ComponentType.includes(:component_category_types).where.not(:component_category_types => { :component_type_id => nil } ).order(:title), :component_category_types, :title, :id, :title, {:include_blank => "Ничего не выбрано"})
+      %>
+  </div>
+  <br />
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Компонент: Комплектующие" %>
+  </div>
+<% end %>

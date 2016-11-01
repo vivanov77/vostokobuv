@@ -1,0 +1,17 @@
+<p>
+  <strong>Наименование:</strong>
+  <%= @user_news.title %>
+</p>
+
+<p>
+  <strong>Содержимое:</strong>
+  <%= @user_news.content %>
+</p>
+
+<p>
+  <strong>Пользователь:</strong>
+  <%= @user_news.user %>
+</p>
+
+<%= link_to 'Редактировать', edit_user_news_path(@user_news) %> | 
+<%= link_to 'Назад', admin_user_news_index_path %>

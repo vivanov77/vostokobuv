@@ -1,0 +1,29 @@
+<h1 class="page-header">Подразделы</h1>
+
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Раздел</th>      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @component_subtypes.each do |component_subtype| %>
+      <tr>
+        <td><%= component_subtype.title %></td>
+        <td><%= component_subtype.component_type.blank? ? "nil" : component_subtype.component_type.title %></td>
+        <td><%= link_to 'Показать', [:admin, component_subtype] %></td>
+        <td><%= link_to 'Редактировать', edit_admin_component_subtype_path(component_subtype) %></td>
+        <td><%= link_to 'Удалить', [:admin, component_subtype], method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<%= link_to 'Новый подраздел', new_admin_component_subtype_path %>

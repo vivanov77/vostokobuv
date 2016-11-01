@@ -1,0 +1,36 @@
+<p>
+  <strong>Наименование:</strong>
+  <%= @component_category_type.title %>
+</p>
+
+<p>
+  <strong>Номер:</strong>
+  <%= @component_category_type.number %>
+</p>
+
+<p>
+  <strong>Показывать в фильтре:</strong>
+  <%= @component_category_type.public %>
+</p>
+
+<p>
+  <strong>Есть размеры (диапазоном):</strong>
+  <%= @component_category_type.has_sizerange %>
+</p>
+
+<% if @component_category_type.has_sizerange %>
+
+  <p>  
+    <strong>Нижняя граница размерного ряда (в фильтре):</strong>
+    <%= @component_category_type.sizerange ? @component_category_type.sizerange.min : "Не указано" %>
+  </p>
+
+  <p>  
+    <strong>Верхняя граница размерного ряда (в фильтре):</strong>
+    <%= @component_category_type.sizerange ? @component_category_type.sizerange.max : "Не указано" %>
+  </p>
+
+<% end %>
+
+<%= link_to 'Редактировать', edit_admin_component_category_type_path(@component_category_type) %> |
+<%= link_to 'Назад', admin_component_category_types_path %>

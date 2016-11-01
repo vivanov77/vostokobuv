@@ -1,0 +1,6 @@
+<h1>Редактирование подраздела</h1>
+
+<%= render 'form', category_type: @category_type %>
+
+<%= link_to 'Показать', [:admin, @category_type] %> |
+<%= link_to 'Назад', admin_category_types_path %>

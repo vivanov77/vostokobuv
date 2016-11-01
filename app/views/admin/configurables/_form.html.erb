@@ -1,0 +1,23 @@
+<%= form_for([:admin, configurable]) do |f| %>
+
+  <div class="field">
+    <%= f.label "Имя" %>
+    <%= Configurable.defaults[@configurable.name][:name] %>
+  </div>
+  
+  <div class="field">    
+    <% if Configurable.defaults[@configurable.name][:type] == "string" %>
+      <%= f.label "Значение" %>
+      <%= f.text_field :value %>
+    <% else %>
+      <%= f.label "Содержимое" %>
+      <%= f.text_area :value, :class => "tinymce", :rows => 40, :cols => 120 %>
+    <% end %>
+  </div>
+
+  <%#= tinymce :language => "ru", menubar: false %>
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Настройку" %>
+  </div>
+<% end %>

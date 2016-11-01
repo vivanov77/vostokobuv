@@ -1,0 +1,62 @@
+<script language="javascript">
+    function changeImage(self) {
+
+      var elem = $(self);
+
+    	$("#component_image")[0].src = elem.attr("data-img-url");
+
+// // http://stackoverflow.com/questions/24889858/slick-slider-slickgoto-method-breaking-the-carousel
+      $('.slider-modal').slick('slickGoTo', parseInt(elem.attr("data-img-num")),10 + 1);
+// // https://github.com/kenwheeler/slick/issues/187
+      $('.slick-slider').resize();
+
+    	return false;
+    }
+
+</script>
+
+<%
+
+# slick slider rows go from top to bottom - not from left to right as it would be expected
+
+images = []
+
+i = 0
+
+while i < list.size  do
+  images << list[i]
+  i +=1
+end
+
+# if list.size == 4
+# # padding thumbnals to 6 - to visually get 3 items per 2 rows
+#   images << list[0]
+#   images << list[1]
+
+# elsif list.size == 5
+# # padding thumbnals to 6 - to visually get 3 items per 2 rows
+#   images << list[0]
+
+# elsif list.size > 6
+# # padding thumbnals to even amount - to visually get even items per 2 rows
+#   rem = list.size % 2
+
+#   if rem == 1
+
+#     images << list[0]
+
+#   end
+
+# end
+
+%>
+
+<section class="<%= list.size > 3 ? "regular-slider-3-2rows" : "regular-slider-3" %> slider-mini">
+  <% images.each_with_index do |image, index| %>
+
+	  <a class="tile-href" data-img-num="<%= index %>" data-img-url="<%= image.file.thumb450.url %>" onclick="changeImage(this)">
+      <%= image_tag(image.file.thumb150.url, class:"tile-image") %>
+	  </a>
+
+  <% end %>
+</section>

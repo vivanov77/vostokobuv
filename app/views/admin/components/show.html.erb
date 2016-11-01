@@ -1,0 +1,64 @@
+<p>
+  <strong>Наименование:</strong>
+  <%= @component.title %>
+</p>
+
+<p>
+  <strong>Раздел:</strong>
+  <%= @component.component_types.size > 0 ? @component.component_types.first.title : "Не указано" %>
+</p>
+
+<p>
+  <strong>Подраздел:</strong>
+  <%= @component.component_subtypes.size > 0 ? @component.component_subtypes.first.title : "Не указано" %>
+</p>
+
+<p>  
+  <strong>Описание:</strong>
+  <div class="filters"><%= @component.description.html_safe %></div>
+</p>
+
+<% unless @component.categories.blank? %>
+  <div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Подраздел: Подошва</th>
+        <th>Компонент: Подошва</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @component.categories.each_pair do |key, value| %>
+        <% value.each do |el| %>
+          <tr>
+            <td><%= component_category_type key %></td>
+            <td><%= component_category_value el %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+<% end %>
+
+<%# if @component.sizerange %>
+
+<% if @component.component_types.first && ComponentCategoryType.where(component_type_id: @component.component_types.first.id).where(has_sizerange: true).first %>
+
+  <p>  
+    <strong>Нижняя граница размерного ряда:</strong>
+    <%= @component.sizerange ? @component.sizerange.min : "Не указано" %>
+  </p>
+
+  <p>  
+    <strong>Верхняя граница размерного ряда:</strong>
+    <%= @component.sizerange ? @component.sizerange.max : "Не указано" %>
+  </p>
+
+<% end %>
+
+<%= render 'layouts/uploaded_images', param: @component %>
+
+<%= link_to 'Редактировать', edit_admin_component_path(@component) %> |
+<%= link_to 'Назад', admin_components_path %>

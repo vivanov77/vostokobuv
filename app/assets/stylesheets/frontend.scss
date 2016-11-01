@@ -1,0 +1,1358 @@
+// COMMON SETUP
+
+$container_width: 1400;  // Common width of the whole logo (in pixels)
+
+$menu_height: 100; // Height of the green logo (in pixels)
+
+// $block_center_width: 80;  // Width of the central block (which is instead of picture) (in pixels)
+
+//$logo_bg_color: true; // on / off background color
+
+// $component_border_color_glow: #4abac5;
+$component_border_color_glow: #9cce6e;
+
+$green_button_color_hover: #9cce6e;
+
+$green_color: #7abb3f;
+
+$top_belt_height: 35;
+
+$user_menu_padding_right: 25;
+
+$button_height: 40; // Height of a common button (in pixels)
+
+$font-size: 14;
+
+// ADDITIONAL SETUP
+
+$bg_container_color: if(global-variable-exists('logo_bg_color'), #e8f7fa, white); // The color of the whole logo block
+
+$container_height: $menu_height + 40; // Common height of the whole logo block (in pixels)
+
+$menu_width: $container_width - 200; // Width of the 2 green logo blocks (with image in between) (in pixels)
+
+$green_block_width: ($menu_width - 300) / 2; // Width of each (of 2) green logo blocks (in pixels)
+
+.papayawhip {background-color: papayawhip;}
+
+.align-center {text-align: center}
+
+.nowrap {white-space: nowrap;}
+
+.valign-middle-parent {
+    display:table;
+    height: 100%; // inherits the parent's div height which (is in pixels)
+    >div {     
+        display: table-cell;
+        vertical-align: middle;
+    }    
+}
+
+.filters {
+  border: 2px solid lightblue;
+  padding-top: 1em;
+  padding-bottom: 1em;  
+  margin-bottom: 2em;
+  background-color: #f0f0f0;
+  overflow: hidden; // to force this block to include all floating blocks
+}
+
+.tinymce_image {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;  
+}
+
+a.keep_visited:visited 
+{
+   color: #fff
+}
+
+
+.margin20 {
+  margin: 20px;
+}
+
+table.admin_nav td {
+  padding-bottom: 0;
+  padding-left: 10px;
+  padding-right: 10px;  
+}
+
+.logo_round {
+
+width:90px;
+height:90px;
+-webkit-border-radius:50%;
+border-radius:50%;
+background-size:100%;
+}
+
+body {
+  
+  // font-family: Lato, sans-serif;
+      background-image: image-url("fon/wall4.png");
+}
+
+.container-fluid, .admin-template {
+
+    // background: #f0fff0;
+    // background: #9AFF9A !important;
+
+    // background-image: image-url("fon/wall4.png");
+}
+
+.header {
+
+    height: $menu_height + px;
+}
+
+.header a:visited
+{
+   color: #fff
+}
+
+.search-control {
+    height: $top_belt_height + px;
+    width: 300px;
+    border-left: 1px solid #e5e5e5;
+}
+
+.search-group {
+    width: 300px;
+}
+
+.search-wrapper-1 {
+    width: (300 - $top_belt_height) + px;
+    height: $top_belt_height + px;    
+    // background-color: #afce6e;
+
+    display:table-cell;
+    vertical-align:middle;
+
+    text-align: center;
+}
+
+.search-input-wrapper {
+
+    width: (300 - $top_belt_height - $top_belt_height * 0.85) + px;
+    height: $top_belt_height + px;
+
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.search-input
+{
+    border-width: 0;
+    padding: 4px 25px;
+
+    &:focus {
+        outline: 0;
+    } 
+    font-size: 14px;
+
+    width: 100%;
+    margin: 0 auto;   
+}
+
+
+.search-wrapper-2 {
+    width: $top_belt_height + px;
+    height: $top_belt_height + px;    
+    background-color: $green_color;
+    display:table-cell;
+
+    :focus {
+    outline: none;
+}
+
+}
+
+.search-wrapper-2 button i {
+  margin-right: 6px;
+  font-size: 15px;
+  line-height: $top_belt_height + px;
+  margin-left: 8px;
+  transform: rotate(-44deg);
+}
+
+.search-wrapper-2 button 
+{
+    padding: 0px 6px;
+    border-width: 0px;
+    background-color: $green_color;
+    transition: all 300ms ease-in 0s;
+    &:hover {
+        background: $green_button_color_hover;
+    }
+
+    width: $top_belt_height + px;
+    height: $top_belt_height + px;
+}
+
+.search-wrapper-2 button i:before {
+    content: "\f22c";
+    color: #fff;
+}
+
+.social-button {
+
+    color: rgb(68, 68, 68);
+    cursor: pointer;
+
+    display:table-cell;
+    vertical-align:middle;    
+
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    width: $top_belt_height + px;
+    height: $top_belt_height + px;
+
+    font-size: 15px;
+    padding: 0px;
+    transition: all 0.3s ease 0s;  
+
+// http://stackoverflow.com/questions/9742166/getting-rid-of-all-the-rounded-corners-in-twitter-bootstrap        
+    border-radius: 0 !important;
+    border-right: 1px solid #e5e5e5;
+
+    &:visited {
+        color: rgb(68, 68, 68);
+    }
+
+    &:hover {
+        background: $green_color;
+        color: white;    
+    }    
+}
+
+.social-icons {
+    border-left: 1px solid #e5e5e5;
+}
+
+.nav .open>a,
+.nav .open>a:focus,
+.nav .open>a:hover {
+
+    // background-color: white;
+    background-color: none;
+}
+
+.logo-title {
+
+    text-transform: uppercase;
+    padding-right: $user_menu_padding_right + px;
+    margin-bottom: $menu_height*0.25 + px;
+
+    display:table-cell;
+    vertical-align:middle;
+        
+    li {font-size: 12px;}
+    a {transition: all 300ms ease-in 0s;}
+    height: $top_belt_height + px;
+}
+
+.logo-title > a:hover,
+.logo-title > a:focus {
+
+  // background-color: #fff;
+  background-color: transparent;
+  background-image: none;
+  color: $green_color;
+}
+
+.logo-iconed:before {
+    content: "\f007";
+    margin-right: 10px;
+    font-family: FontAwesome;
+    font-size: 12px;
+}
+
+.logo-image {
+
+    position: absolute;
+    z-index: 1;
+    top: $menu_height*0.1 + px;
+}
+
+// http://stackoverflow.com/questions/18153234/center-a-column-using-twitter-bootstrap-3
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.logo-text {
+	width: $green_block_width + px;
+}
+
+.logo-text:hover {
+    background-color: $green_button_color_hover;
+}
+
+.logo-text a:hover {
+    background-color: $green_button_color_hover;
+    text-decoration: none;
+}
+
+
+.text-align-center {text-align: center}
+
+.logo-hr {
+	// http://www.webdev.ru/articles/styling-hr-tag-with-css.html
+    color: $green_color; // для IE
+    background-color: $green_color; // для Firefox, Opera, Safari
+    border:0px none;
+    height:10px; // высота 1px IE, Firefox, Opera, Safari
+    clear:both; // для очистки, если тег идет после float элемента
+    // margin-bottom: 0;
+}
+
+// .logo-hr-2 {
+//     // http://www.webdev.ru/articles/styling-hr-tag-with-css.html
+//     color: $green_color; // для IE
+//     background-color: $green_color; // для Firefox, Opera, Safari
+//     border:0px none;
+//     height:1px; // высота 1px IE, Firefox, Opera, Safari
+//     clear:both; // для очистки, если тег идет после float элемента
+//     margin-top: 0;
+// }
+
+.breadcrumb {
+
+    margin-bottom: 0;
+    font-size: 14px;
+    background-color: transparent;
+    // white-space: nowrap;
+
+    li {
+
+        &:not(:last-child):after {
+
+        padding: 0 5px;
+        color: #ccc;
+        content: "/\00a0";
+        }
+    }
+}
+
+.breadcrumb>li+li:before {
+    padding: 0;
+    content: "";
+}
+
+
+.logo-account div {
+
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.logo-account {
+    position:absolute;
+}
+
+.logo-account a {
+    transition: all 300ms ease-in 0s;
+}
+
+.logo-container {
+
+    background-color: $bg_container_color;
+    width: $container_width + px;
+    height: $container_height + px;
+}
+
+.logo_menu {
+
+    display:table-cell;
+    vertical-align:bottom;
+    width: $container_width + px;    
+    height: $container_height + px;
+}
+
+.logo-hello {
+
+    // display: inline-block;
+    // width: $container_width + px;
+    // text-align: center;
+    margin-right: 30px;
+}
+
+.valign-bottom-parent {
+// http://howtocenterincss.com/#contentType=text&container.width=80px&container.height=200px&horizontal=center&vertical=middle&browser.IE=7
+    display:table-cell;
+    vertical-align:bottom;
+}
+
+.dropdown-menu-right {
+    border-top-color: $green_color;
+
+    border-top-style: solid;
+    border-top-width: 4px;
+
+    box-shadow: 6px 6px 10px 0 rgba(0,0,0,0.3);
+
+    color: rgb(96, 96, 96);
+    border-radius: 0;
+
+    border-bottom-style: solid;
+    border-bottom-width: 4px;
+    border-bottom-color: $green_color;
+
+    text-transform: none;
+
+}
+
+.caret-big {
+    // border-top: 5px dashed;
+    // border-right: 5px solid transparent;
+    // border-left: 5px solid transparent;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+
+  background-color: #fff;
+  background-image: none;
+  color: $green_color;
+}
+
+/////search box
+
+.search-form {
+    bottom: 0px;
+    box-sizing: border-box;
+    color: rgb(96, 96, 96);
+    display: inline-block;
+    height: 42.2222px;
+    left: 0px;
+    position: relative;
+    right: 0px;
+    text-align: left;
+    text-size-adjust: 100%;
+    top: 0px;
+    width: 495px;
+    column-rule-color: rgb(96, 96, 96);
+    perspective-origin: 247.778px 21.1111px;
+    transform-origin: 247.778px 21.1111px;
+    border: 1.11111px solid rgb(229, 229, 229);
+    font: normal normal normal normal 14px / 7px Lato, sans-serif;
+    margin: 0px;
+    outline: rgb(96, 96, 96) none 0px;
+    
+}
+
+.search-button-wrapper {
+
+    bottom: 0px;
+    box-sizing: border-box;
+    color: rgb(96, 96, 96);
+    float: right;
+    height: 40px;
+    left: 0px;
+    min-height: 40px;
+    position: relative;
+    right: 0px;
+    text-align: center;
+    text-size-adjust: 100%;
+    top: 0px;
+    // width: 40px;
+    z-index: 1;
+    column-rule-color: rgb(96, 96, 96);
+    perspective-origin: 20px 20px;
+    transform-origin: 20px 20px;
+    border: 0px none rgb(96, 96, 96);
+    font: normal normal normal normal 14px / 40px Lato, sans-serif;
+    outline: rgb(96, 96, 96) none 0px;
+
+}
+
+.parent_header {
+    display: table;
+}
+
+.green-button {
+
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    // text-size-adjust: 100%;
+    text-transform: uppercase;
+    white-space: nowrap;
+    background: rgb(122, 187, 63) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    font-size: 15px;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 0px;
+    transition: all 0.3s ease 0s;  
+// http://stackoverflow.com/questions/9742166/getting-rid-of-all-the-rounded-corners-in-twitter-bootstrap        
+    border-radius: 0 !important;
+    &:visited {
+    color: #fff;
+    }
+    &:hover {
+    background: $green_button_color_hover;
+    color: rgb(255, 255, 255);
+    }
+
+    display:table-cell; // works only with parent display: table;
+    // width: 100%;
+    width: inherit;
+    // display:inline-block;
+    vertical-align:middle;
+}
+
+.logo-center-image {
+
+
+}
+
+.order-button {
+    height: 40px;
+}
+
+///////////////////////////////////////
+
+.order-button {
+
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    height: 40px;
+    min-height: 40px;
+    text-size-adjust: 100%;
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 240px;
+    column-rule-color: rgb(255, 255, 255);
+    perspective-origin: 20px 20px;
+    transform-origin: 20px 20px;
+    background: rgb(122, 187, 63) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(255, 255, 255);
+    font-size: 14px;
+    outline: rgb(255, 255, 255) none 0px;
+    padding: 0px;
+    transition: all 0.3s ease 0s;  
+}
+
+//////////////////////////////////
+
+.banner-static-inner {
+  overflow: visible;
+  z-index: 3;
+  padding-bottom:24px;
+}
+
+.banner-static-inner .image-blend-text:hover {
+  box-shadow: 0px 0px 10px $component_border_color_glow;
+  -moz-box-shadow: 0px 0px 10px $component_border_color_glow;
+  -webkit-box-shadow: 0px 0px 10px $component_border_color_glow;
+  border-radius: 2px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+
+// http://css.yoksel.ru/background-blend-mode/
+  background: #404040;
+  background-blend-mode: screen;
+}
+
+.banner-static-inner .image-blend-text {
+    width: 370px;
+    height: 370px;
+}
+
+@media (min-width: 1200px) {
+  .container
+   {
+    width: 1200px;
+    padding-left: 0; // cancel bootstrap padding 15px
+    padding-right: 0; // cancel bootstrap padding 15px
+
+    // background: #ffff99;
+  }
+}
+
+.logo {
+    // background: #ffff99;
+
+}
+
+.bottom-margin {
+    margin-bottom: 60px;
+}
+
+.bottom-margin20 {
+    margin-bottom: 20px;
+}
+
+.top-margin {
+    margin-top: 60px;
+}
+
+.top-margin20 {
+    margin-top: 20px;
+}
+
+///////////////////////////////////////
+
+.black-button {
+
+    color: rgb(255, 255, 255);
+    cursor: default;
+    display: table-cell;
+
+    height: 40px;
+
+    text-transform: uppercase;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 240px;
+
+    background: rgb(51, 51, 51);
+    border: 0px none rgb(255, 255, 255);
+    font-size: 14px;
+
+    text-align:center; 
+
+}
+
+////////////////////
+
+.about-company {
+    height: 240px;
+    width: 440px;
+    background-color: #f5f5f5;
+    overflow:hidden;
+    margin-top: 20px;
+}
+
+////////////////////
+
+.image-no-blend-text {
+  width: 370px;
+  height: 370px;
+  // http://stackoverflow.com/questions/26967890/css-set-background-image-by-data-image-attr
+  // background-image: url(attr(data-image));
+  background-size: 370px 440px;
+}
+
+.image-blend-text {
+  width: 370px;
+  height: 370px;
+  // http://stackoverflow.com/questions/26967890/css-set-background-image-by-data-image-attr
+  // background-image: url(attr(data-image));
+}
+
+.image-blend-text:before {
+    content: attr(data-mode);
+    // display: table-cell;
+    display: block;
+    width: 344px;
+    // height: 80px;
+    position: relative;
+    ///////// top: 340px;
+    top: 240px;  
+    left:12px;  
+    padding: 3px;    
+
+    text-align: center;
+    // vertical-align:middle;
+    // http://stackoverflow.com/questions/2939914/vertically-align-text-in-a-div
+    line-height: 80px;
+    
+
+
+    font-size: 26px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.8);
+    color: rgb(51, 51, 51);
+    // overflow: hidden;
+}
+
+.div_href {
+    display:inline-block;
+}
+
+.div_href:hover {
+    text-decoration:none;  
+}
+
+///////////////////////////////////////////////
+.vina_janshop .social-icons li {
+
+  margin-left: -2px;
+  margin-right: -2px;
+
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;  
+
+  -webkit-transition: all 300ms ease-in 0s;
+  -moz-transition: all 300ms ease-in 0s;
+  -o-transition: all 300ms ease-in 0s;
+  transition: all 300ms ease-in 0s;  
+
+  cursor: pointer;
+}
+
+.index-h1 {
+
+    margin-top: 0;
+}
+
+.vina_janshop .sp-module div.vina-treeview-virtuemart ul li:last-child {
+    border-bottom: none;
+}
+
+.tile {
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    // border: 1px solid #e5e5e5;
+    text-align: center;
+}
+
+.tile-text {
+    text-align: center;
+    display:inline-block;
+    padding:5px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.tile-image {
+
+    width:   100%;
+    height:  100%;
+}
+
+.slick-active {
+    // width:   450px !important;
+}
+
+.tile-modal-image {
+
+    // width:   450px !important;
+    width:   100%;
+    height:  100%;
+}
+
+// @media (min-width: 768px) {
+// .modal-dialog {
+//     width: 600px;
+//     margin: 30px auto;
+// }
+// }
+
+.tile-href {
+    &:hover {
+    color: inherit;
+    background: inherit;
+    text-decoration: none;
+    }
+
+    &:focus {
+    outline: none 0;
+}
+}
+
+.margin-bottom20 {
+  margin-bottom: 20px;
+}
+
+.large-text-area {
+
+    width: 600px;
+    height: 300px;
+}
+
+.margin-bottom20 {
+  margin-bottom: 20px;
+}
+
+.margin-top20 {
+  margin-top: 20px;
+}
+
+.margin-top30 {
+  margin-top: 30px;
+}
+
+.margin-top10 {
+  margin-top: 10px;
+}
+
+.top-logo-belt {
+  border: 1px solid #e5e5e5;
+}
+
+.button-height {
+    height: $button_height + px;
+}
+
+.slider-item-title {
+    text-align: center;
+    padding: 5px;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.vina_janshop .sp-module div.vina-treeview-virtuemart ul li a, .font-size16 {
+  font-size: 16px !important;
+}
+
+
+.font-size16 {
+  .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+
+font-size: 16px !important;
+}
+}
+
+.vmcat-a {
+    cursor: pointer;
+}
+
+.margin-right20 {
+    margin-right: 20px;
+}
+
+.padding-left-0 {
+    padding-left: 0;
+}
+
+.filtered-panel {
+    border: 1px solid #e5e5e5;
+    font-size: 14px !important;
+    // overflow: hidden;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    display: table;
+    background-color: white;
+    z-index: 1;
+}
+
+.filter-title {
+    // color: $green_color;
+}
+
+.filter-item {
+    float: left;
+    padding-right: 30px;
+}
+
+.filter-input {
+
+    display:table-cell;
+    vertical-align:bottom;
+    height:30px;
+    background-color: $green_color;    
+    color: white;
+    // clear:right;
+    &:focus {
+        outline: 0;
+    }     
+}
+
+
+.filter-select, button.multiselect {
+    height:30px;
+    // background-color: $green_color;
+    // color: white;
+    background-color: white;
+
+    border: 1px solid #e5e5e5;
+
+// http://stackoverflow.com/questions/9742166/getting-rid-of-all-the-rounded-corners-in-twitter-bootstrap        
+    border-radius: 0 !important;
+
+            /* background-color: #e0e0e0; */
+    // background-position: 0;
+    background-image: none;
+
+    &:hover {
+        background-color: white;
+    }
+
+    option {
+        background-color: white;
+        // color: black;
+        color: rgb(68, 68, 68);
+    }
+}
+
+// .open > button.multiselect {
+// background-color: white;
+
+// }
+
+.open>.dropdown-toggle.btn-default:hover {
+    // color: #333;
+    background-color:  white;
+    // border-color: #8c8c8c;
+    // border: 1px solid #e5e5e5;
+}
+
+.btn-group.open .dropdown-toggle {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.open>.dropdown-toggle.btn-default {
+    // color: #333;
+background-color:  white;    
+    // background-color: #e6e6e6;
+    // border-color: #adadad;
+}
+
+.open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+    background-color:  white; 
+    // color: #333;
+    // background-color: #d4d4d4;
+    // border-color: #8c8c8c;
+}
+
+.btn-default:focus, .btn-default:hover {
+    // background-color: #e0e0e0;
+    // background-position: 0 -15px;
+    background-color:  white; 
+}
+
+.btn-default.active, .btn-default:active {
+    // background-color: #e0e0e0;
+    background-color:  white;
+    // border-color: #dbdbdb;
+}
+
+.btn.active, .btn:active {
+    // background-image: none;
+    /* outline: 0; */
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.btn-default.active.focus, .btn-default.active:focus, .btn-default.active:hover, .btn-default:active.focus, .btn-default:active:focus, .btn-default:active:hover, .open>.dropdown-toggle.btn-default.focus, .open>.dropdown-toggle.btn-default:focus, .open>.dropdown-toggle.btn-default:hover {
+    /* color: #333; */
+    /* background-color: #d4d4d4; */
+    // border-color: #8c8c8c;
+    background-color:  white;
+}
+
+.text-area-order {
+
+    // height: 100px !important; 
+    height: 10em !important;
+    border-radius: 0 !important;
+}
+
+.form-control {
+    border-radius: 0 !important;    
+}
+
+.form-control:focus {
+    border-color: $green_color !important;
+    // outline: 0;
+    // -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    // box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(156, 206, 110,.6) !important;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(156, 206, 110,.6) !important;    
+
+    // rgb(156, 206, 110);
+}
+
+.components_footer1_title {
+    background: rgb(51, 51, 51);
+    border: 1px solid #e5e5e5;
+    display:table-cell;
+    font-size: 20px;
+    padding: 5px;
+    height: 40px;
+    color: rgb(255, 255, 255);
+    width: 200px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+    // color: rgb(255, 255, 255);
+    // cursor: default;
+    // display: table-cell;
+
+    // height: 40px;
+
+    // text-transform: uppercase;
+    // vertical-align: middle;
+    // white-space: nowrap;
+    // width: 240px;
+
+    // background: rgb(51, 51, 51);
+    // border: 0px none rgb(255, 255, 255);
+    // font-size: 14px;
+
+    // text-align:center; 
+
+.components_footer1 {
+
+    // height: 300px;
+    // background-color: white;
+    // border: 1px solid #e5e5e5;
+    margin-bottom: 30px;
+    // overflow: hidden;
+    padding: 5px;
+    font-size: 16px;
+
+    p {
+        margin: 20px 0px 20px;
+    }
+}
+
+.footer-bottom {
+    background: rgb(51, 51, 51);
+    height: 50px;
+    width:100%;
+    color: white;
+}
+
+.float-left {float: left;}
+
+.float-right {float: right;}
+
+.footer-item {
+    padding-left: 30px;
+    padding-right: 10px;
+    position: relative;
+}
+
+.footer-item-phone:before {
+    content: image-url("phone.png");
+    position: absolute;
+    left: 9px;
+    // top: 8px;
+}
+
+.footer-item-email:before {
+    content: image-url("mali.png");
+    position: absolute;
+    left: 9px;
+    // top: 8px;
+}
+
+.components-footer2 {
+
+    background-color: $green_color;
+    font-size: 16px;
+    color: white;
+
+    // height: 50px;
+
+    // height: 46px;
+    // border: 1px solid #e5e5e5;
+    // margin-bottom: 30px;
+    // overflow: hidden;
+    // padding: 5px;
+ 
+    // display:table;
+    width:100%;
+    // display:inline-block;
+
+    // text-align: center;
+    // margin: 0 auto;
+    // display:table;
+
+    // float: left;
+// 
+
+    // width: 100%;
+    // height: 60px;  
+  //     position: absolute;
+  // bottom: 0;  
+  // position:fixed;
+  // bottom:0;
+}
+
+.components-footer2-wrapper {
+
+//     // text-align:center;
+//     // float: none;
+//     // margin: 0 auto;
+//     // vertical-align: middle;
+//     // width: 300px;
+    // display:table-cell;
+// http://stackoverflow.com/questions/114543/horizontally-center-a-div-in-a-div    
+    display: table;
+    margin: 0 auto;
+}
+
+
+.components-footer2-item {
+
+    display:table-cell;
+    padding: 15px;
+    color: white;
+    &:visited {
+
+        color: white;
+    }
+}
+
+// .sticky-bottom {
+
+//     position: absolute;
+//     bottom: 0;
+//     width:100%;
+//         // display: block;    
+// }
+
+.modal-image {
+// http://stackoverflow.com/questions/13171968/magnifying-glass-zoom-cursor-over-image   
+    cursor: -moz-zoom-in; 
+    cursor: -webkit-zoom-in; 
+    cursor: zoom-in;
+}
+
+.modal-link-close {
+
+    background-color: white;
+
+    color: black;
+    
+    &:visited {
+
+        color: black;
+    }
+
+    &:hover {
+
+        background-color: white;
+
+        text-decoration: none;
+    }    
+
+}
+
+.admin-user-panel {
+
+    text-align: right;
+
+    div {
+
+        padding-left: 15px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        display: inline-block;
+    }
+}
+
+// .page-article {
+//     border: 1px solid #e5e5e5;
+//     background-color: white;
+//     margin-bottom: 30px;
+// }
+
+
+// .big-checkbox:focus {
+//     // outline: 5px auto -webkit-focus-ring-color;
+//     // outline-offset: -2px;
+//     outline: none  !important;
+//     outline-offset: 0 !important;  
+// } 
+
+input[type=checkbox].before-middle-checkbox {
+margin: 10px 0 0;
+}
+
+// input[type=radio] {
+//   bottom: 2px;
+// }
+
+.padding-left-15 {
+    padding-left: 15px;
+}
+
+.width-100-percent {
+    width: 100%;
+}
+
+.sp-totop {
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    position: fixed;
+    right: 12px;
+    bottom: 35px;
+    display: block;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #3b3b3b;
+    cursor: pointer;
+    z-index: 9999;
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    border-radius: 100%;
+    bottom: 50px;
+
+    // background-color: white;
+
+    &:hover {
+
+        background-color: $green_color;
+    }    
+}
+
+
+.sp-totop i {
+    margin: 5px;
+    font-size: 0;
+    height: 40px;
+    width: 40px;
+    // height: 35px;
+    // width: 35px;    
+    // background: image-url("back-top-green.png") no-repeat scroll 50% 50%;
+    background: image-url("back-top.png") no-repeat scroll 50% 50%;
+    border-radius: 100%;
+    position: relative;
+    // top: -11.5px;
+    top: -8.5px;
+    left: -1px;
+
+    // top: -6.5px;
+    // left: -0.5px;
+
+    background-color: $green_color;
+    // background-color: white;
+}
+
+.clear-left {
+
+    clear:left
+}
+
+.tinymce-component {
+
+  // border: 1px solid #e5e5e5;
+
+  // overflow: hidden; // to force this block to include all floating blocks
+
+  p {
+    margin-left: 0;
+    margin-top: 15px;
+    margin-bottom: 0;
+    margin-right: 0;
+
+    font-size: 16px;
+  }
+}
+
+.mce-content-body {
+    p { 
+        font-family: Lato, sans-serif;
+        font-size: 14px;
+
+    }
+
+    background-image: none;
+}
+
+.slider-image-250 > .tile-image {
+
+    width: 250px;
+    height: 250px;
+
+}
+
+.search-table {
+
+    td {    
+
+    font-size: 14px;
+    padding: 0px !important;
+
+    }
+
+    .search-item {
+
+        width:100%;
+        height:100%;
+               
+        padding:8px;
+    }
+
+    td:hover {
+    color: #fff;
+    background-color: $green_color;
+
+    a {
+        color: #fff;
+         text-decoration: none;
+
+    }
+
+    // $green_button_color_hover;
+}
+
+    a:hover {
+    color: #fff;
+    background-color: $green_color;
+     text-decoration: none;
+
+    // $green_button_color_hover;
+}
+
+}
+
+.green-link-block {
+
+    $padding: 5px;
+
+    a {
+            padding: $padding $padding;
+
+        &:hover {
+
+        background-color: $green_color;
+        padding: $padding $padding;
+        // box-shadow:0 0 4px 4px $green_color;
+        // border-radius:$padding $padding;
+       }
+
+    }
+}
+
+.footer-item-info {
+    a {
+
+        color: white;
+
+        &:visited {
+            color: white;
+        }
+
+        &:hover {
+            background-color: transparent;
+       }
+    }
+}
+
+.main-image {
+    $padding: 5px;
+
+    display: inline;
+        background-color: $green_color;
+        padding: $padding $padding;    
+}

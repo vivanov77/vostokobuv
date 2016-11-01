@@ -1,0 +1,29 @@
+<p>
+  <strong>Наименование:</strong>
+  <%= @component_type.title %>
+</p>
+
+<p>
+  <strong>Номер:</strong>
+  <%= @component_type.number %>
+</p>
+
+<p>
+  <strong>Включить блок статей:</strong>
+  <%= @component_type.aactive %>
+</p>
+
+<p>
+  <strong>Название блока статей:</strong>
+  <%= @component_type.atitle %>
+</p>
+
+<p>
+  <strong>Содержимое блока статей:</strong>
+  <div class="filters"><%= @component_type.acontent.html_safe %></div>
+</p>
+
+<%= render 'layouts/uploaded_images', param: @component_type %>
+
+<%= link_to 'Редактировать', edit_admin_component_type_path(@component_type) %> | 
+<%= link_to 'Назад', admin_component_types_path %>

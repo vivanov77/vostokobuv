@@ -1,0 +1,32 @@
+<%= form_for(user_news) do |f| %>
+  <% if user_news.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_news.errors.count, "error") %> prohibited this user_news from being saved:</h2>
+
+      <ul>
+      <% user_news.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Наименование" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Содержимое" %>
+    <%= f.text_area :content, :class => "tinymce", :rows => 40, :cols => 120 %>
+  </div>
+
+<!--   <div class="field">
+    <%#= f.label :user_id %>
+    <%#= f.text_field :user_id %>
+  </div> -->
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Пользовательская новость" %>
+  </div>
+<% end %>

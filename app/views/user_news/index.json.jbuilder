@@ -1,0 +1,1 @@
+json.array! @user_news, partial: 'user_news/user_news', as: :user_news

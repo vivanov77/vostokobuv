@@ -1,0 +1,2 @@
+module UserNewsHelper
+end

@@ -1,0 +1,30 @@
+<h1 class="page-header">Компоненты: Обувь</h1>
+
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Подраздел</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @category_values.each do |category_value| %>
+      <tr>
+        <td><%= category_value.title %></td>
+        <td><%= category_value.category_type.blank? ? "nil" : category_value.category_type.title %></td>
+        <td><%#S= category_value.category.blank? ? "nil" : category_value.category.title %></td>
+        <td><%= link_to 'Показать', [:admin, category_value] %></td>
+        <td><%= link_to 'Редактировать', edit_admin_category_value_path(category_value) %></td>
+        <td><%= link_to 'Удалить', [:admin, category_value], method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<%= link_to 'Новый Компонент: Обувь', new_admin_category_value_path %>

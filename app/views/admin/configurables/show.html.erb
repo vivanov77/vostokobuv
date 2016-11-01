@@ -1,0 +1,13 @@
+<p>
+  <strong>Имя:</strong>
+  <%= Configurable.defaults[@configurable.name][:name] %>
+</p>
+
+<p>
+  <strong>Содержимое:</strong>
+  <div class="filters"><%= @configurable.value.html_safe %></div>
+</p>
+
+
+<%= link_to 'Редактировать', edit_admin_configurable_path(@configurable) %> |
+<%= link_to 'Назад', admin_configurables_path %>

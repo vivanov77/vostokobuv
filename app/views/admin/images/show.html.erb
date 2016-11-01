@@ -1,0 +1,83 @@
+<p>
+  <strong>Id:</strong>
+  <%= @image.id %>
+</p>
+
+<p>
+  <strong>Parent Id:</strong>
+  <%= @image.imageable_id %>
+</p>
+
+<p>
+  <strong>Parent Type:</strong>
+  <%= @image.imageable_type %>
+</p>
+
+<p>
+  <strong>Место хранения:</strong>
+  <%= image_real_file_path @image %>
+</p>
+
+<p>
+  <strong>Cсылка на изображение:</strong>
+  <%= link_to URI.unescape(get_image_url request, @image).to_s, (get_image_url request, @image) %>
+</p>
+
+<p>
+<strong>Родитель:</strong>
+<%= @image.imageable_id ? (link_to 'Показать', Rails.application.routes.url_helpers.send("admin_#{@image.imageable_type.underscore}_path", @image.imageable_id)) : "Не указано" %>
+</p>
+
+<%#= remote_file_exists?(url) %>
+
+
+<% img_info = image_info @image %>
+
+<% if img_info %>
+
+	<p>
+	  <strong>Ширина:</strong>
+	  <%= img_info["width"] %> пикселей
+	</p>
+
+	<p>
+	  <strong>Высота:</strong>
+	  <%= img_info["height"] %> пикселей
+	</p>
+
+	<p>
+	  <strong>Размер файла:</strong>
+	  <%= img_info["filesize2"] %> <%= img_info["filesize_unit"] == "Mb" ? "Мб" : "Кб" %>
+	</p>	
+
+<% end %>
+
+<p>
+  <strong>Изображение:</strong><br>
+  <%= image_tag(@image.file.url) %>
+</p>
+
+<% [150, 180, 250, 370, 450, 570].each do |size| %>
+
+	<% if remote_file_exists? (get_thumb_url request, @image, size) %>
+
+		<p>
+		  <strong>Миниатюра <%= size.to_s %> пикселей:</strong><br>
+		  <%= image_tag(@image.file.send("thumb" + size.to_s).url) %>
+		</p>
+
+	<% else %>
+
+		<p>
+		  <strong>Миниатюра <%= size.to_s %> пикселей:</strong><br>
+		  Не обнаружена
+		</p>
+
+	<% end %>
+
+<% end %>
+
+<%#= link_to(image_tag("men1.jpg"), components_path(component_type_id: component_type.id)) %>
+
+<%= link_to 'Редактировать', edit_admin_image_path(@image) %> |
+<%= link_to 'Назад', admin_images_path %>

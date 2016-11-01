@@ -1,0 +1,6 @@
+<h1>Редактирование подраздела</h1>
+
+<%= render 'form', component_subtype: @component_subtype %>
+
+<%= link_to 'Показать', [:admin, @component_subtype] %> |
+<%= link_to 'Назад', admin_component_subtypes_path %>

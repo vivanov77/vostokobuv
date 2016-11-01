@@ -1,0 +1,30 @@
+<h1 class="page-header">Обувь</h1>
+
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Название</th>
+      <th>Производитель</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shoes.each do |shoe| %>
+      <tr>
+        <td><%= shoe.title %></td>
+        <td><%= shoe.user ? shoe.user.email : "Нет производителя" %></td>
+<!-- http://blog.roberteshleman.com/2014/08/14/using-rails-namespaces-for-admin-actions/         -->
+        <td><%= link_to 'Показать', [:admin, shoe] %></td>
+        <td><%= link_to 'Редактировать', edit_admin_shoe_path(shoe) %></td>
+        <td><%= link_to 'Удалить', [:admin, shoe], method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<%= link_to 'Новая обувь', new_admin_shoe_path %>

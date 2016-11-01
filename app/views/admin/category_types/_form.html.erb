@@ -1,0 +1,22 @@
+<%= form_for([:admin, category_type]) do |f| %>
+  <% if category_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category_type.errors.count, "error") %> prohibited this category_type from being saved:</h2>
+
+      <ul>
+      <% category_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Наименование" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Подраздел" %>
+  </div>
+<% end %>

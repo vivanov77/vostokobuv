@@ -1,0 +1,29 @@
+<%= form_for([:admin, component_subtype]) do |f| %>
+  <% if component_subtype.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(component_subtype.errors.count, "error") %> prohibited this component_subtype from being saved:</h2>
+
+      <ul>
+      <% component_subtype.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Наименование" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Раздел" %><br />
+    <%= f.collection_select :component_type_id, ComponentType.order(:title), :id, :title,
+  # http://guides.rubyonrails.org/form_helpers.html#select-boxes-for-dealing-with-models
+                  prompt: 'Выберите раздел' %>
+  </div>  
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Подраздел" %>
+  </div>
+<% end %>

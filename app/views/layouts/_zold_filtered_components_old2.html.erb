@@ -1,0 +1,29 @@
+<div id="parent-navbar-main" >
+  <div class="filters" id="navbar-main">
+    <h4>Фильтры:</h4>
+  <!-- http://stackoverflow.com/questions/9596168/how-to-dynamically-call-routes-helper-in-rails         -->  
+    <%= form_tag components_path, method: "get" do %>
+      <% if @component_type.component_category_types.size > 0 %>
+
+        <% @filters.each do |filter| %>
+          <%= filter.title %>
+
+          <%= select(:categories, filter.id, ComponentCategoryValue.includes(:component_category_type).where( component_category_type_id: filter.id ).collect {|p| [ p.title, p.id ] }, { include_blank: "Ничего не выбрано", :selected => @categories ? @categories[filter.id.to_s] : false }) %>
+
+          
+          <%= hidden_field_tag :component_type_id, @component_type.id if @component_type%> 
+
+        <% end %>
+      <% elsif @component_type.component_subtypes.size > 0 %>
+        <%= @component_type.title %>
+
+          <%= select_tag("component_subtype_id", options_from_collection_for_select(ComponentSubtype.includes(:component_type).where( component_type_id: @component_type.id ), :id, :title, @component_subtype_id), { include_blank: "Ничего не выбрано" }) %>
+
+          <%= hidden_field_tag :component_type_id, @component_type.id if @component_type%>          
+
+      <% end %>
+
+    <input type="submit" value="Применить" />
+    <% end %>      
+  </div>
+</div>

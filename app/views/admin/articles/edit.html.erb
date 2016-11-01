@@ -1,0 +1,6 @@
+<h1>Редактирование статьи</h1>
+
+<%= render 'form', article: @article %>
+
+<%= link_to 'Показать', [:admin, @article] %> |
+<%= link_to 'Назад', admin_articles_path %>

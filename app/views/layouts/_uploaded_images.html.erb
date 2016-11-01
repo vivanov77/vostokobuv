@@ -1,0 +1,82 @@
+<% f = param %>
+
+<% if f.class.to_s == "ActionView::Helpers::FormBuilder" %>
+
+  <% if f.object.respond_to? :image %>
+
+    <div class="field">
+      <%= f.label (logo ||= false) ? "Логотип" : "Загруженное изображение" %><br />  
+      <% if f.object.image && f.object.image.id %>
+        <%= image_tag f.object.image.file_url, :style => "width: 300px; height: 250px;"  %><br />
+        <%= link_to "Удалить", admin_image_path(f.object.image, :redirect_back => true), method: :delete, data: { confirm: 'Вы уверены?' } %><br />
+      <% end %>
+    </div>
+
+    <%= f.fields_for :image, Image.new do |ff| %>
+      <div class="field">
+        <%= ff.label "Файл" %><br>
+        <%= ff.file_field :file %>
+      </div>
+    <% end %>
+
+  <% else %>
+
+    <div class="field">
+      <%= f.label "Загруженное изображение" %><br />
+
+      <% f.object.images.each_with_index do |image, index| %>
+        <% if image.id %>
+          <%= image_tag image.file_url, :style => "width: 300px; height: 250px;"  %>
+          <%= link_to "Удалить", admin_image_path(image, :redirect_back => true), method: :delete, data: { confirm: 'Вы уверены?' } %>&nbsp;&nbsp;&nbsp;
+          <%  if f.object.class.to_s.downcase == "component" %>
+            <% if index == f.object.main_image %>
+              <div class="main-image">Основное изображение</div>
+            <% else %>
+              <%= link_to "Сделать основным", admin_component_path(f.object, component: {id: f.object, main_image: index}), method: :patch %>
+            <% end %>
+          <% end %>
+          <br />          
+        <% end %>
+      <% end %>
+    </div>
+
+
+    <%= f.fields_for :images, Image.new do |ff| %>
+    <div class="field">
+      <%= ff.label "Файл" %><br>
+      <%= ff.file_field :file, :multiple => true, name: "#{f.object.class.to_s.downcase}[images_attributes][][file]" %>      
+
+    </div>
+    <% end %>
+
+  <% end %>
+
+<% else %>
+
+  <% if f.respond_to? :image %>
+
+    <strong>Загруженное изображение:</strong>
+    <p>
+      <% if f.image && f.image.id %>
+        <%= image_tag f.image.file_url, :style => "width: 300px; height: 250px;"  %><br />
+      <% end %>    
+    </p>
+
+  <% else %>  
+
+    <strong>Загруженные изображения:</strong>
+    <p>  
+      <% f.images.each_with_index do |ff, index| %>
+        <%= image_tag ff.file_url, :style => "width: 300px; height: 250px;"  %>
+          <% if index == f.main_image %>
+            <span class="main-image">Основное изображение</span>
+          <% end %>
+          <br />
+      <% end %>
+    </p>
+
+  <% end %>
+
+<% end %>
+
+ <%# console %>

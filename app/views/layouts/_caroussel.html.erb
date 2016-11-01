@@ -1,0 +1,12 @@
+<section class="regular-slider-<%= slides_to_show %> slider-<%= slider_width %>">
+  <% list.each do |item| %>
+
+	  <a href="<%= Rails.application.routes.url_helpers.send(item.class.to_s.downcase + "_path", item) %>" class="tile-href">
+	    <div class="slider-image-<%= slider_image_width %>">
+	      <%= image_tag(chi(item, slider_image_width), class:"tile-image") %>
+	      <div class="slider-item-title"><%= item.title %></div>
+	    </div>
+	  </a>
+
+  <% end %>
+</section>

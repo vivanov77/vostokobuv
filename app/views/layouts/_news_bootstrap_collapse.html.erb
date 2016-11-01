@@ -1,0 +1,64 @@
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <% user.user_news.each_with_index do |user_news, i| %>
+
+    <div class="panel panel-default">
+      <div class="panel-heading" role="tab" id="headingOne">
+        <h4 class="panel-title">
+          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#news<%= i %>" aria-expanded="true" aria-controls="news<%= i %>">
+            <%= ds(user_news.created_at) %>: &nbsp;&nbsp;&nbsp;<%= user_news.title %>
+          </a>
+        </h4>
+      </div>
+      <div id="news<%= i %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= i %>" data-collapse-remote="<%= (business_card ? "rostov_obuv" : "") + user_news_path(id: user_news).to_s %>" data-loaded="false">
+        <div class="panel-body">
+        </div>
+      </div>
+    </div>
+
+
+  <% end %>
+</div>
+
+
+<script type="text/javascript">
+
+// http://stackoverflow.com/questions/13910596/how-to-make-twitter-bootstrap-collapse-work-on-dynamically-loaded-html-using-aja
+// http://stackoverflow.com/questions/23532483/how-do-i-fetch-the-content-for-each-tab-using-ajax-rails4-bootstrap3
+$('[data-toggle="collapse"]').click(function(e){
+      e.preventDefault();
+
+      var target_element = $(this).attr("href");
+
+      $(target_element).collapse('toggle');
+
+      if (!$(this).hasClass('collapsed')) {
+        
+        var remoteUrl = $(target_element).attr('data-collapse-remote');
+        var loadedOnce = $(target_element).attr("data-loaded");
+
+        if (remoteUrl !== '' && (loadedOnce === "false")) {
+            $(target_element).load(remoteUrl + "?business_card=true")
+
+            $(target_element).attr("data-loaded",true);
+        }
+
+      }
+
+      // set_sticky_panel; // requires "fixed_menu.js"
+
+      return false;
+});
+
+$('#accordion').on('hidden.bs.collapse', function () {
+  // do something…
+  // console.log('hidden.bs.collapse');
+  set_sticky_panel('hidden.bs.collapse');
+})
+
+$('#accordion').on('shown.bs.collapse', function () {
+  // do something…
+  // console.log('shown.bs.collapse');
+  set_sticky_panel('shown.bs.collapse');  
+})
+
+</script>

@@ -1,0 +1,35 @@
+
+<div class="row">
+  <div class="col-sm-3">
+    <%= link_to "Оформить заявку", new_order_path, class:"btn green-button button-height"%>
+  </div>
+</div>
+
+<div class="bottom-margin"></div>
+
+<div class="row col-centered">
+<% @component_types.each do |component_type| %>
+
+<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+  <div class="banner-static-inner">
+    <%#= link_to(image_tag("men1.jpg"), components_path(component_type_id: component_type.id)) %>
+    <a href="<%= components_path(component_type_id: component_type.id) %>" class="div_href"><div data-mode="&mdash; <%= component_type.title %> &mdash;" <%= component_type.image ? raw("style=\"background-image: url('#{component_type.image.file.thumb370.url}');\" class=\"image-blend-text\"") : raw("style=\"background-image: url('#{ image_path("no_image2_370.png")}');\" class=\"image-blend-text\"") %>></div></a>  
+  </div>
+</div>
+
+<% end %>
+</div>
+
+<div class="bottom-margin"></div>
+
+<div class="row">
+  <div class="col-sm-3">
+    <div class="black-button">
+       Новые поступления
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <%= render :partial => "layouts/caroussel", locals: { list: @components, slides_to_show: 4, slider_image_width: 250, slider_width: 1200 } %>
+</div>

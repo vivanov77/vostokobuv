@@ -1,0 +1,22 @@
+<% content_for :menu_padding do %>
+  <div class="col-sm-9">
+
+    <h1 class="page-header">Обувь</h1>
+
+    <%= render :partial => "layouts/filtered_shoes", :locals => { :path_name => "shoes_path", :path_param => nil } %>    
+    
+  </div>
+
+<% end %>
+
+<div class="row">
+  <% @shoes.each do |shoe| %>
+
+    <div class="col-sm-3">
+      <div class="tile">
+        <%= link_to(image_tag("0.jpg", width: '270'), shoe) %>
+        <h4 class="tile-text"><%= shoe.title %></h4>
+      </div>
+    </div>
+  <% end %>
+</div>

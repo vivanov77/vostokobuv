@@ -1,0 +1,18 @@
+<p>
+  <strong>Наименование:</strong>
+  <%= @article.title %>
+</p>
+
+<div class="filters">
+  <strong>Содержимое:</strong>
+  <%= @article.content.html_safe %>
+</div>
+
+<!-- <p>
+  <strong>Content raw:</strong>
+  <%#= @article.content %>
+</p> -->
+
+
+<%= link_to 'Редактировать', edit_admin_article_path(@article) %> |
+<%= link_to 'Назад', admin_articles_path %>

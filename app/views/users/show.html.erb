@@ -1,0 +1,144 @@
+<% content_for :menu_padding do %>
+
+  <div class="col-md-2">
+    <p>
+      <strong>Организация:</strong>
+      <%= @user.organization %>
+    </p>
+    <p>
+      <strong>Логотип:</strong><br>
+      <%= image_tag("0.jpg", width: '120', height: '120') %>
+    </p>
+  </div>
+
+  <div class="col-md-7 papayawhip">
+      <h4><i>Данные производителя</i></h4>
+  <!-- http://dedushka.org/uroki/9632.html -->
+      <div>
+        <!-- Навигация -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">О компании</a></li>
+          <li><a href="#opinion" aria-controls="opinion" role="tab" data-toggle="tab">Отзывы</a></li>
+          <li><a href="#delivery" aria-controls="delivery" role="tab" data-toggle="tab">Доставка</a></li>
+          <li><a href="#news" aria-controls="news" role="tab" data-toggle="tab">Новости</a></li>  
+          <li><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Контакты</a></li>
+
+        </ul>
+        <!-- Содержимое вкладок -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="info"><%= @user.description %></div>
+          <div role="tabpanel" class="tab-pane" id="opinion">
+
+              <div class="table-responsive">
+              <table class="table table-striped">
+                <tbody>
+                  <% @user.opinions.each do |opinion| %>
+                    <tr>
+                      <td><%= opinion.optext %></td>       
+                     </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              </div>
+
+              <%= render 'opinions/form', opinion: Opinion.new, user_id: @user.id %>
+
+          </div>
+
+          <div role="tabpanel" class="tab-pane" id="contact">
+            <p>
+              <strong>Город:</strong>
+              <%= @user.city %>
+            </p>
+
+            <p>
+              <strong>Адрес:</strong>
+              <%= @user.address %>
+            </p>      
+
+            <p>
+              <strong>Телефон организации:</strong>
+              <%= @user.phone %>
+            </p>
+
+            <p>
+              <strong>Контактное лицо:</strong>
+              <%= @user.contact %>
+            </p>
+
+            <%= render :partial => "layouts/yandex_map_contact", :locals => { :contact => (@user.city + (@user.city.blank? ? "" : ", ") + @user.address) } %>
+
+          </div>
+          
+          <div role="tabpanel" class="tab-pane" id="delivery"><%= @user.delivery_info %></div>
+          <div role="tabpanel" class="tab-pane" id="news">
+
+          <!-- <div class="table-responsive">
+          <table class="table table-striped">
+            <tbody>
+              <%# @user.user_news.each do |user_news| %>
+                <tr>
+                  <td><%#= ds(user_news.created_at) %>: &nbsp;&nbsp;&nbsp;<%#= link_to user_news.title, (@business_card ? "rostov_obuv" : "") + user_news_path(id: user_news).to_s %></td>
+                 </tr>
+              <%# end %>
+            </tbody>
+          </table>
+          </div>  --> 
+
+          <%= render :partial => "layouts/news_bootstrap_collapse", :locals => { :user => @user, :business_card => @business_card } %>        
+
+          </div>    
+        </div>
+      </div>
+
+    </div>
+  </div>  
+
+<% end %>  
+
+<%#= render :partial => "layouts/news_bootstrap_collapse", :locals => { :user => @user, :business_card => @business_card } %>
+
+<%#= render :partial => "layouts/yandex_map_contact", :locals => { :contact => (@user.city + (@user.city.blank? ? "" : ", ") + @user.address) } %>
+
+<div class="bottom-margin"></div>
+
+<div class="container">
+
+  <div class="row container col-centered">
+
+  <%= render :partial => "layouts/filtered_shoes", :locals => ( @business_card ? { :url_name => @business_card } : { :path_name => "user_path", :path_param => "#{@user.id}" } ) %>
+
+  </div>
+
+  <div class="row">
+    <% @shoes.each do |shoe| %>
+
+      <div class="col-sm-3">
+        <div class="tile">
+          <%= link_to(image_tag("0.jpg", width: '270'), shoe) %>
+          <h4 class="tile-text"><%= shoe.title %></h4>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+// http://getbootstrap.com/javascript/#tabs-events  
+ set_sticky_panel('shown.bs.tab');
+})
+
+</script>
+
+<!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempus, neque vel euismod elementum, elit erat rutrum velit, ac convallis elit leo et sem. Morbi accumsan lorem et neque pellentesque ultricies. Fusce vitae venenatis dui, in auctor enim. Morbi in quam id lectus fringilla tristique vel efficitur libero. Nullam luctus at justo eu ultricies. Aliquam quis malesuada sapien, id tempor lacus. Mauris malesuada mattis purus, eget commodo dui dignissim eu. Duis egestas purus ut lacus mollis, eget varius sem venenatis. Suspendisse sollicitudin nisi tellus, a viverra lacus aliquet quis. Mauris ipsum turpis, imperdiet non ligula at, fringilla condimentum mauris. Sed elit erat, aliquam id neque non, tincidunt egestas est. Pellentesque a urna fermentum, interdum tortor ac, pulvinar elit. Maecenas scelerisque lorem nec nibh congue, eget ultricies nisl tempus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque elementum sem quis justo suscipit, eu blandit arcu vehicula. Maecenas facilisis quam sit amet felis tristique, nec fermentum tellus interdum.
+
+Mauris varius quam est, vitae blandit tortor bibendum non. Vestibulum luctus, dolor eget elementum luctus, enim urna ultricies nibh, sodales commodo mi nunc at tortor. Mauris cursus rutrum euismod. Phasellus eget lectus id nunc dapibus elementum. Aliquam elit justo, vehicula non cursus sed, hendrerit at urna. Duis massa leo, luctus aliquam tristique ut, rhoncus eu erat. Praesent rhoncus, nunc sit amet ultricies viverra, nisi magna elementum lorem, ac sollicitudin mauris risus id elit.
+
+Duis ac diam metus. Fusce tincidunt pharetra dui, id efficitur metus sagittis ut. Pellentesque in mauris pulvinar, varius nisl id, congue felis. Praesent semper diam vel pulvinar pellentesque. Maecenas accumsan metus at auctor dignissim. Nam interdum malesuada neque. Sed dignissim ex iaculis ex sodales elementum.
+
+Integer pulvinar eu mauris nec eleifend. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed felis mauris, placerat consectetur lectus id, tempus rutrum urna. Nulla nec orci sit amet nibh accumsan molestie. Ut et neque tempor, fermentum erat id, commodo tortor. Donec vehicula ullamcorper diam, ut tempus urna pharetra non. Duis pulvinar leo urna, sit amet porttitor erat ultrices in. Sed finibus dolor sit amet pulvinar varius. Duis sem magna, porta non condimentum ac, dictum vitae orci. Praesent sed nibh sit amet dolor porta tincidunt non ac magna. Curabitur in lectus enim. Quisque tincidunt ante quis ligula facilisis placerat. Nunc molestie eros odio, eget tincidunt leo sollicitudin ut. Nullam vitae aliquet tellus.
+
+Pellentesque dictum, massa sed pharetra facilisis, ante lorem accumsan augue, quis auctor massa mauris sit amet metus. Aliquam ut eros sit amet ligula aliquet semper. Proin fringilla, ante a hendrerit ultrices, sem magna tristique purus, non ultrices sem nisl fermentum erat. Vestibulum at finibus mi, ut iaculis dolor. Nam sit amet est quis augue dictum rutrum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Ut nec justo dui. Maecenas pulvinar orci eget sapien malesuada, ac posuere nisl pharetra. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p> -->

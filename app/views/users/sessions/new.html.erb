@@ -1,0 +1,61 @@
+<!-- <div class="col-sm-9"> -->
+
+  <h2>Войти</h2>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {class:"form-horizontal"}) do |f| %>
+
+    <div class="form-group">
+      <div class="field">
+        <%= f.label "Электронная почта", class: "col-sm-3 control-label nowrap" %>
+        <div class="col-sm-6">
+        <%= f.email_field :email, class: "form-control", placeholder: "Электронная почта" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="field">
+        <%= f.label "Пароль", class: "col-sm-3 control-label nowrap" %>
+        <div class="col-sm-6">
+        <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "Пароль" %>
+        </div>
+      </div>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+
+<!--       <div class="field">
+        <%#= f.check_box :remember_me %>
+        <%#= f.label "Помнить меня" %>
+      </div> -->
+
+    <div class="form-group">
+      <div class="field">
+        <%= f.label "Помнить меня", class: "col-sm-3 control-label nowrap" %>
+        <div class="col-sm-6 ">
+        <%= f.check_box :remember_me, class: "before-middle-checkbox" %>
+        </div>
+      </div>
+    </div>
+
+<!--   <div class="checkbox">
+    <label>
+      <%#= f.check_box :subscribe_news_shoes %> Подписаться на новости об обуви
+    </label>
+  </div>  -->
+
+    <% end %>
+
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-6 actions">
+        <%= f.submit "Войти", class:"green-button button-height" %>
+      </div>
+    </div>
+
+  <% end %>
+
+  <div class="col-sm-offset-3 col-sm-6 actions green-link-block">
+    <%= render "devise/shared/links" %>
+  </div>
+
+<!-- </div> -->

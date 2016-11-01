@@ -1,0 +1,48 @@
+<%= tinymce_assets %>
+
+<%= form_for([:admin, component_type]) do |f| %>
+  <% if component_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(component_type.errors.count, "error") %> prohibited this component_type from being saved:</h2>
+
+      <ul>
+      <% component_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Наименование" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Номер" %>
+    <%= f.number_field :number %>
+  </div>
+
+  <%= render 'layouts/uploaded_images', param: f %>
+
+  <div class="field">
+    <%= f.label "Включить блок статей" %>
+    <%= f.check_box :aactive %>
+  </div>  
+
+  <div class="field">
+    <%= f.label "Название блока статей" %>
+    <%= f.text_field :atitle %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Содержимое блока статей" %>
+    <%= f.text_area :acontent, :class => "tinymce", :rows => 40, :cols => 120 %>  
+  </div>
+
+  <%= tinymce :language => "ru", menubar: false %>
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Раздел" %>
+  </div>
+<% end %>

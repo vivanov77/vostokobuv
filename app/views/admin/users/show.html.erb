@@ -1,0 +1,91 @@
+<p>
+  <strong>Электронная почта:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Админ:</strong>
+  <%= @user.admin %>
+</p>
+
+<p>
+  <strong>Заблокирован:</strong>
+  <%= @user.blocked %>
+</p>
+
+<p>
+  <strong>Имя:</strong>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <strong>Отчество:</strong>
+  <%= @user.middle_name %>
+</p>
+
+<p>
+  <strong>Фамилия:</strong>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Организация:</strong>
+  <%= @user.organization %>
+</p>
+
+<p>
+  <strong>Город:</strong>
+  <%= @user.city %>
+</p>
+
+<p>
+  <strong>Адрес:</strong>
+  <%= @user.address %>
+</p>
+
+<p>
+  <strong>Телефон:</strong>
+  <%= @user.phone %>
+</p>
+
+<p>
+  <strong>Производитель:</strong>
+  <%= @user.producer %>
+</p>
+
+<p>
+  <strong>Подписаться на новости об обуви:</strong>
+  <%= @user.subscribe_news_shoes %>
+</p>
+
+<p>
+  <strong>Подписаться на новости о товарах:</strong>
+  <%= @user.subscribe_news_components %>
+</p>
+
+<p>
+  <strong>Имя сайта-визитки:</strong>
+  <%= @user.url_name %>
+</p>
+
+<p>
+  <strong>Описание:</strong>
+  <%= @user.description %>
+</p>
+
+<p>
+  <strong>Контактное лицо:</strong>
+  <%= @user.contact %>
+</p>
+
+<p>
+  <strong>Информация:</strong>
+  <%= @user.info %>
+</p>
+
+
+
+<%= render 'layouts/uploaded_images', param: @user %>
+
+<%= link_to 'Редактировать', edit_user_path(@user) %> | -->
+<%= link_to 'Назад', admin_users_path %>

@@ -1,0 +1,39 @@
+<div class="row">
+	<div class="col-sm-3 padding-left-0">
+		<% if @component_type %>
+		  <h3><%= @component_type.title %></h3>		    
+		<% end %>
+	</div>	
+	<div class="col-sm-3 col-sm-offset-6">
+		<%= link_to "Оформить заявку", new_order_path, class:"btn green-button button-height"%>
+	</div>
+
+</div>	
+
+<div class="row">	
+
+	<% if @component_type %>
+	    <%= render :partial => "layouts/filtered_components_multiple" %>	
+
+		<div class="bottom-margin"></div>
+	<% end %>
+
+	<% @components.each_with_index do |component, index| %>
+
+	<div class="<%= "col-sm-4" + ((index % 3 == 0) ? " clear-left" : "") %>">
+	  <a href="<%= component_path(component) %>" class="tile-href">
+	    <div class="tile">
+	      <%= image_tag(chi(component), class:"tile-image") %>
+	      <h4 class="tile-text"><%= component.title %></h4>
+	    </div>
+	  </a>
+	</div>
+	<% end %>
+
+</div>
+
+<div class="row">
+	<% if @component_type && @component_type.aactive %>
+	    <%= render :partial => "layouts/page_article" unless Rails.env.production? %>
+	<% end %>    
+</div>

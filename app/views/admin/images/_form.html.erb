@@ -1,0 +1,14 @@
+<%= form_for([:admin, image]) do |f| %>
+  <%= image_tag image.file %>
+  <div class="field">
+    <%= f.label :imageable_id %><br>
+    <%= f.number_field :imageable_id %>
+  </div>
+  <div class="field">
+    <%= f.label :file %><br>
+    <%= f.file_field :file %>
+  </div>
+  <div class="actions">
+    <%= f.submit submit_russian_text "Изображение" %>
+  </div>
+<% end %>

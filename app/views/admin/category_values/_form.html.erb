@@ -1,0 +1,39 @@
+<%= form_for([:admin, category_value]) do |f| %>
+  <% if category_value.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category_value.errors.count, "error") %> prohibited this category_value from being saved:</h2>
+
+      <ul>
+      <% category_value.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Наименование" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Публичный" %>
+    <%= f.check_box :public %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Подраздел" %><br />
+    <%= f.collection_select :category_type_id, CategoryType.order(:title), :id, :title,
+  # http://guides.rubyonrails.org/form_helpers.html#select-boxes-for-dealing-with-models
+                  prompt: 'Выберите подраздел' %>          
+  </div>
+
+  <%= render 'layouts/uploaded_images', param: f %>
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Компонент: Обувь" %>
+  </div>
+
+<% end %>
+
+

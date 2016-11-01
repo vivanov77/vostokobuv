@@ -1,0 +1,10 @@
+.mce-item-table, .mce-item-table td, .mce-item-table th, .mce-item-table caption {
+  border: 1px solid #BBB;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+.mce-content-body {
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+}  

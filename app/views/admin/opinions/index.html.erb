@@ -1,0 +1,29 @@
+<h1 class="page-header">Отзывы</h1>
+
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Содержимое</th>
+      <th>Производитель</th>      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @opinions.each do |opinion| %>
+      <tr>
+        <td><%= opinion.optext %></td>
+        <td><%= opinion.producer.title %></td>         
+        <td><%= link_to 'Показать', [:admin, opinion] %></td>
+        <td><%= link_to 'Редактировать', edit_admin_opinion_path(opinion) %></td>
+        <td><%= link_to 'Удалить', [:admin, opinion], method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<%= link_to 'Новое мнение', new_admin_opinion_path %>

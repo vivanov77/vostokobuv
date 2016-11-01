@@ -1,0 +1,66 @@
+<% if @keyword.blank? %>
+
+<h3>Задан пустой поисковый запрос</h3>
+
+<% else %>
+
+<h1 class="page-header">Результаты поиска по запросу: "<%= @keyword %>"</h1>
+
+<!--   <%# if @shoes.size > 111111111111110 %>
+<h2>Обувь</h2>
+
+  <div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Название</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%# @shoes.each do |shoe| %>
+        <tr>
+          <td><%#= link_to shoe.title, shoe %></td>
+        </tr>
+      <%# end %>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="bottom-margin"></div>
+<%# end %> -->
+
+<% if @components.size > 0 %>
+  <h2>Товары</h2>
+
+  <div class="table-responsive">
+  <table class="table table-striped search-table">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <!-- <th colspan="2"></th> -->
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @components.each do |component| %>
+        <tr>
+          <!-- <td><%#= link_to component.title, component %></td> -->
+          <td>
+          <a href="<%= component_path(component) %>">
+<!-- http://stackoverflow.com/questions/3337914/how-to-make-a-td-a-link           -->
+            <div class="search-item">
+              <%= component.title %>
+            </div>
+          </a>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="bottom-margin"></div>
+<% end %>
+
+<% end %>

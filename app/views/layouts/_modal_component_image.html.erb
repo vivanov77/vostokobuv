@@ -1,0 +1,51 @@
+<!-- Button trigger modal -->
+<!-- <div> -->
+<%= image_tag(chi(@component, 450), width: "450", id: "component_image", class: "modal-image", "data-toggle" => "modal", "data-target" => "#myModal") %>
+
+<!-- Modal -->
+<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> -->
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">  <!-- modal dialog hidden content -->
+        <% if @component.images.size > 1 %>
+          <section class="regular-slider-1 slider-modal">
+            <% @component.images.each do |item| %>
+                <%= image_tag(item.file.thumb570.url, class:"tile-modal-image") %>
+            <% end %>
+          </section>          
+        <% else %>
+          <%= image_tag(chi(@component, 570), width: "570", id: "component_image") %>
+        <% end %>
+      </div>
+      <div class="modal-footer text-align-centers">
+        <!-- <button type="button" class="" data-dismiss="modal">Закрыть</button> -->
+        <a href class="modal-link-close" data-dismiss="modal">Закрыть</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->
+
+<script>
+
+$('#myModal').on('shown.bs.modal', function (e) {
+  // do something...
+// https://github.com/kenwheeler/slick/issues/187
+// alert(1);
+// setImage();
+  $('.slick-slider').resize();
+})
+
+function setImage() {
+
+  $('.slider-modal').slick('slickGoTo', <%= @component.main_image %>);
+}
+
+$(document).ready(setTimeout(setImage, 0))
+
+</script>
+
+
+
+

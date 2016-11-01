@@ -1,0 +1,11 @@
+<% unless flash[:notice].blank? %>
+  <!-- <br><br><br> -->
+  <!-- <br> -->
+  <p class="notice"><%= notice %></p>
+<% end %>
+<% unless flash[:alert].blank? %>
+  <!-- <br><br><br> -->
+  <p class="alert"><%= alert %></p>
+<% end %>
+
+<p id="notice"><%= notice %></p>

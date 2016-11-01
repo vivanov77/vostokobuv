@@ -1,0 +1,22 @@
+<%= form_for([:admin, opinion]) do |f| %>
+  <% if opinion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(opinion.errors.count, "error") %> prohibited this opinion from being saved:</h2>
+
+      <ul>
+      <% opinion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Содержимое" %>
+    <%= f.text_area :optext %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Отзыв" %>
+  </div>
+<% end %>

@@ -1,0 +1,28 @@
+<%#= tinymce %>
+
+<%= form_for([:admin, article]) do |f| %>
+  <% if article.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+      <ul>
+      <% article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <div class="field">
+      <%= f.label "Наименование" %>
+      <%= f.text_field :title, class: "form-control" %>
+    </div>
+  </div>
+
+  <%= f.text_area :content, :class => "tinymce", :rows => 40, :cols => 120 %>  
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Статью" %>
+  </div>
+<% end %>

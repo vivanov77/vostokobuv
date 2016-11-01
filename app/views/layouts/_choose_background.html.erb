@@ -1,0 +1,42 @@
+<%
+
+bgcolors = [
+
+"EEE8AA",
+
+"9AFF9A",
+
+"C8F7C5",
+
+"A2DED0",
+
+]
+
+%>
+
+<select onchange="set_color(this);">
+<option value="" style="background-color: none">Выберите цвет</option>
+<% bgcolors.each do |item|  %>
+	<option value="<%= item %>" style="background-color: #<%= item %>"><%= item.upcase %></option>
+<% end %>	
+
+</select>
+
+<script type="text/javascript">
+    function set_color(sel) {
+
+        var bg;
+
+    	if (sel.value === "")
+    	{
+            bg = "none";
+    	}
+    	else
+        {
+            bg = "#" + sel.value;
+        }
+
+        $('.container-fluid').css('background', bg);
+      }
+
+</script>

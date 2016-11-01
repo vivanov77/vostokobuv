@@ -1,0 +1,40 @@
+<div class="logo" id="top_navbar">
+  <div class="row top-logo-belt">
+
+    <div class="coln-sm-3 coln-sm-offset-5">
+    <%#= render :partial => "layouts/social_networks" %>
+    </div> 
+
+    <div class="col-sm-3 coln-sm-offset-4">
+      <%= render :partial => "layouts/search" %>
+    </div> 
+
+    <div class="coln-sm-11">
+      <%= render :partial => "layouts/user_panel" %>
+    </div>
+  </div>
+
+  <div class="row margin-top30 ">
+
+    <div class="coln-sm-1 coln-sm-offset-1 logo-image">
+      <%= image_tag("logo_sirius.png", class: "header") %>    
+    </div>
+
+    <div class="coln-sm-11 coln-sm-offset-2 parent_header">
+      <%= link_to "Обувь от производителя", under_construction_path, class:"btn green-button header" %>
+    </div>  
+
+    <div class="coln-sm-3 coln-sm-offset-1 text-align-center">
+      <%= image_tag("logo_center.png", class: "header logo-center-image") %>
+    </div>
+
+    <div class="coln-sm-11 coln-sm-offset-1 parent_header">
+      <%= link_to 'Комплектующие для обуви', store_components_path, class:"btn green-button header" %>
+    </div>  
+    
+  </div>
+
+
+<hr class="logo-hr">
+
+</div>

@@ -1,0 +1,41 @@
+<div class="admin-user-panel">
+  <div><%= current_user.email %></div>
+  <div><%= link_to 'На главную', root_path %></div>
+  <div><%= link_to 'Выйти', destroy_user_session_path, :method => :delete %></div>
+</div>
+
+<div id="admin_nav"> 
+  <div class="table-responsive">
+    <table class="admin_nav">
+      <tbody>
+        <tr>
+
+          <td><%= link_to 'Обувь', admin_shoes_path %></td>
+          <td><%= link_to 'Подразделы', admin_category_types_path %></td>
+          <td><%= link_to 'Компоненты: Обувь', admin_category_values_path %></td>
+          <td><%= link_to 'Пользователи', admin_users_path %></td>
+          <td><%= link_to 'Изображения', admin_images_path %></td>
+          <td><%= link_to 'Отзывы', admin_opinions_path %></td>
+          <td><%= link_to 'Новости', admin_news_index_path %></td>
+
+          <td><%= link_to 'Пользовательские новости', admin_user_news_index_path %></td>
+        </tr>
+
+        <tr>
+        <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td><%= link_to 'Разделы', admin_component_types_path %></td>
+          <td><%= link_to 'Товары', admin_components_path %></td>
+          <td><%= link_to 'Подразделы: Комплектующие', admin_component_category_types_path %></td>
+          <td><%= link_to 'Компоненты: Комплектующие', admin_component_category_values_path %></td>
+          <td><%= link_to 'Подразделы', admin_component_subtypes_path %></td>
+          <td><%= link_to 'Заказы', admin_orders_path %></td>
+          <td><%= link_to 'Статьи', admin_articles_path %></td>
+          <td><%= link_to 'Настройки', admin_configurables_path %></td>
+         
+        </tr>   
+      </tbody>
+    </table>
+  </div>
+</div>

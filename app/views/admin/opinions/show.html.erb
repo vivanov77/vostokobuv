@@ -1,0 +1,7 @@
+<p>
+  <strong>Содержимое:</strong>
+  <%= @opinion.optext %>
+</p>
+
+<%= link_to 'Редактировать', edit_opinion_path(@opinion) %> | 
+<%= link_to 'Назад', admin_opinions_path %>

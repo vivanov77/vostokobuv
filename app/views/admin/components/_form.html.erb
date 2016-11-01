@@ -1,0 +1,123 @@
+<%= tinymce_assets %>
+
+<%= form_for([:admin, component]) do |f| %>
+  <% if component.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(component.errors.count, "error") %> prohibited this component from being saved:</h2>
+
+      <ul>
+      <% component.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Наименование" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Описание" %>
+    <%= f.text_area :description, :class => "tinymce", :rows => 15, :cols => 15 %>
+  </div>
+
+<!-- http://stackoverflow.com/questions/14099629/how-to-use-tinymce-content-css-in-rails -->
+  <%= tinymce :language => "ru", menubar: false, width: 380, :content_css => asset_path('application.css')  %>
+
+  <%#= tinymce :language => "ru", menubar: false, width: 380 %>  
+
+   <div class="field">
+    <%= f.label "Раздел" %>
+    <%= f.collection_select :component_type_ids, ComponentType.order(:title), :id, :title,
+  # http://guides.rubyonrails.org/form_helpers.html#select-boxes-for-dealing-with-models
+  # http://guides.rubyonrails.org/form_helpers.html#using-form-helpers
+                  :prompt => 'Выберите раздел' %>
+
+  </div>
+
+  <div class="field">
+  <!-- http://stackoverflow.com/questions/5319400/want-to-find-records-with-no-associated-records-in-rails-3 -->
+  <!-- http://apidock.com/rails/ActionView/Helpers/FormOptionsHelper/grouped_collection_select -->
+    <%= f.label "Подраздел" %>
+      <%= f.grouped_collection_select(:component_subtype_ids, ComponentType.includes(:component_subtypes).where.not(:component_subtypes => { :component_type_id => nil } ).order(:title), :component_subtypes, :title, :id, :title, {:include_blank => "Ничего не выбрано"})
+      %>
+  </div>  
+
+  <div class="field">
+  <%= f.label :categories if component.categories %>
+
+    <% ComponentCategoryType.where(component_type: component.component_types.first).each do |component_category| %>
+      <% unless component_category.has_sizerange %>
+      <br />
+      <div>
+        <%= component_category.title %>        
+      </div>
+
+      <% list = ComponentCategoryValue.order(:title).where(component_category_type: component_category) %>
+
+      <%= f.fields_for :categories do |ff| %>
+        <%= ff.collection_select component_category.id, list, :id, :title,
+  # http://guides.rubyonrails.org/form_helpers.html#select-boxes-for-dealing-with-models
+  # http://guides.rubyonrails.org/form_helpers.html#using-form-helpers
+  # http://stackoverflow.com/questions/10449101/rails-adding-options-to-collection-select
+          # component.categories.blank? || component.categories[component_category.id.to_s].blank? ? {:include_blank => "Ничего не выбрано"} : {:include_blank => "Ничего не выбрано", :selected => component.categories[component_category.id.to_s]}, { multiple: "multiple" }
+          { :selected => component.categories ? component.categories[component_category.id.to_s] : false }, { multiple: "multiple" }          
+        %>
+      <% end %><br />
+
+      <script type="text/javascript">
+
+      $(function() {
+
+        $("<%= '#component_categories_' + component_category.id.to_s %>").multiselect({
+
+        nonSelectedText: 'Не выбрано',
+
+        buttonText: function(options, select) {
+            if (options.length === 0) {
+                return 'Не выбрано';
+            }
+            if (options.length === 1) {
+              return options.html();
+            }                
+            else if (options.length === <%= list.size %>) {
+                return 'Всё выбрано (' + options.length + ")";
+            }                
+            else if (options.length > 1) {
+                return options.length + ' выбрано';
+            }
+          }
+        });
+
+      });
+
+      </script>
+
+      <% end %>
+    <% end %>
+  </div><br />
+
+  <% if component.component_types.first && ComponentCategoryType.where(component_type_id: component.component_types.first.id).where(has_sizerange: true).first %>
+
+    <div class="field">
+      <%= f.label "Нижняя граница размерного ряда:" %>
+      <%= number_field_tag :lower_sizerange_bound, value = component.sizerange.try(:min) %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Верхняя граница размерного ряда:" %>
+      <%= number_field_tag :upper_sizerange_bound, value = component.sizerange.try(:max) %>
+    </div>
+
+  <% end %>   
+
+  <%= render 'layouts/uploaded_images', param: f %>  
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Товар" %>
+  </div>
+<% end %>
+
+<%#= console %>

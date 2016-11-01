@@ -1,0 +1,28 @@
+<% if user_signed_in? %>
+
+  <div class="logo-title"><%= link_to 'Админка', admin_shoes_path, class:"logo-hello" %>
+    <a href="<%= edit_user_path(current_user)%>" class="logo-hello">Привет, <%= current_user.email %></a> 
+    <%= link_to 'Профиль', edit_user_path(current_user), class: "logo-iconed" %> / <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>        
+  </div>
+
+<% else %>
+
+  <div class="nav navbar-nav navbar-right">
+    <div class="dropdown logo-title"><%= link_to 'Регистрация', new_user_registration_path, class: "logo-iconed" %> / <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Вход <span class="caret caret-big"></span></a>
+<!-- http://stackoverflow.com/questions/14404923/how-is-the-caret-on-twitter-bootstrap-constructed     -->
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li><%= link_to 'Войти', new_user_session_path %></li>
+
+<!-- <li role="separator" class="divider"></li>
+        <li><%#= link_to 'Войти через Facebook', user_facebook_omniauth_authorize_path %></li>
+        <li><%#= link_to 'Войти через Vkontakte', user_vkontakte_omniauth_authorize_path %></li> -->
+<!-- http://stackoverflow.com/questions/13539821/twitter-bootstrap-navigation-dividers-not-working-properly-for-google-chrome         -->
+        <!-- <li role="separator" class="divider"></li> -->
+        <!-- <li><%#= link_to 'Админка', admin_shoes_path unless Rails.env.production? %></li>      -->
+
+        <!--          <li><%#= link_to 'Sign in with Odnoklassniki', user_odnoklassniki_omniauth_authorize_path %></li>  -->   
+      </ul>
+    </div>    
+  </div>
+  
+<% end %>

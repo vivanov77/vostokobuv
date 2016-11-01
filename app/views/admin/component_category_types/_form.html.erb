@@ -1,0 +1,58 @@
+<%= form_for([:admin, component_category_type]) do |f| %>
+  <% if component_category_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(component_category_type.errors.count, "error") %> prohibited this component_category_type from being saved:</h2>
+
+      <ul>
+      <% component_category_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Наименование" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Номер" %>
+    <%= f.number_field :number %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Показывать в фильтре" %>
+    <%= f.check_box :public %>
+  </div>  
+
+  <div class="field">
+    <%= f.label "Подраздел" %><br />
+    <%= f.collection_select :component_type_id, ComponentType.order(:title), :id, :title,
+  # http://guides.rubyonrails.org/form_helpers.html#select-boxes-for-dealing-with-models
+                  prompt: 'Выберите раздел' %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Есть размеры (диапазоном)" %>
+    <%= f.check_box :has_sizerange %>
+  </div>  
+
+  <% if component_category_type.has_sizerange %>
+
+    <div class="field">
+      <%= f.label "Нижняя граница размерного ряда (в фильтре):" %>
+      <%= number_field_tag :lower_sizerange_bound, value = component_category_type.sizerange.try(:min) %>
+    </div>
+
+    <div class="field">
+      <%= f.label "Верхняя граница размерного ряда (в фильтре):" %>
+      <%= number_field_tag :upper_sizerange_bound, value = component_category_type.sizerange.try(:max) %>
+    </div>
+
+  <% end %>  
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Подраздел: Комплектующие" %>
+  </div>
+<% end %>

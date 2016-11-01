@@ -1,0 +1,122 @@
+
+<%
+
+def href name, title, href="", remote=false
+  @cout += "<a class=\"vmcat-a\" href=\"#{href}\" title=\"#{title}\" " +  
+  ((remote === true) ? "data-remote=\"true\"" : "") +"><span class=\"catTitle\">#{name}</span></a>"
+end
+
+
+def item name, title, href="", last=false, is_extra_menu=false, remote=false
+
+  @cout += "<li #{is_extra_menu ? " class=\"extra_menu\" style=\"display: none;\"" : ""}>"
+  href(name, title, href, remote)
+  @cout += "</li>"
+
+end
+
+def bottom_spoiler menu_expand_title
+
+  @cout += "<li class=\"vmcategory-more last\">
+    <div class=\"more-inner\">
+      <span class=\"more-view\"><em class=\"more-categories\">More Categories</em></span>
+    </div>
+  </li>"
+
+end
+
+def sub_menu name, title, href="", last=false, remote=false
+
+  @cout += "<li class=\"expandable#{last ? " lastExpandable" : ""}\">
+    <div class=\"hitarea expandable-hitarea#{last ? " lastExpandable-hitarea" : ""}\">
+      </div>"
+  href (name, title, href, remote)
+    @cout += "<ul class=\"sub-menu treeview\" style=\"display: none;\">"
+    yield 
+    @cout += "</ul>"
+  @cout += "</li>"
+
+end
+
+# ///////////////////////////////////////////////////////////////////
+
+# def make_menu_sample flag_bottom_spoiler=false
+
+#   @cout = ""
+
+#   sub_menu("Computer (357)", "Computer") do
+#     sub_menu("HP (85)", "HP") do
+#       item("Bootees Bags (17)", "Bootees Bags")
+#       item("Jackets (17)", "Jackets", "", true)
+#     end
+
+#     item("HP2 (85)", "HP2")
+
+#     sub_menu("Dell (17)", "Dell", "", true) do
+#       item("Raincoats (17)", "Raincoats")
+#       item("Gifts (17)", "Gifts", "", true)
+#     end
+#   end
+
+#   item( "Camera (17)", "Camera")
+
+#   item( "Laptops (17)", "Laptops", "", false, flag_bottom_spoiler)
+
+#   bottom_spoiler if flag_bottom_spoiler
+
+#   raw(@cout)
+
+# end
+
+def make_menu list, menu_title, spoiler_items=0, remote=false
+
+  @cout = ""
+
+  list.each_with_index do |oitem, index|
+
+    item( oitem[:title], oitem[:title], oitem[:href], (index == list.size - 1) ? true : false, spoiler_items > 0 ? ((index > list.size - spoiler_items - 1) ? true : false) : false, remote )
+
+  end
+
+  bottom_spoiler(menu_title) if spoiler_items > 0
+
+  raw(@cout)
+
+end
+
+%>
+<!-- //////////////////////////////////////////////// -->
+
+<div class="vina_janshop">
+  <div class="sp-column">
+    <div class="sp-module vm_category">
+      <div class="sp-module-title">
+        <h3><span class="title"><em style="display: none;">Home 1</em><%= menu_title %></span>
+        </h3>
+      </div>
+
+      <div class="sp-module-content">
+        <div class="vina-treeview-virtuemart" id="vina-treeview-virtuemart136">          
+
+          <ul class="level0 treeview">
+
+          <%= make_menu list, menu_title, 0, remote %>
+
+          </ul>
+        </div>
+
+<!--         <script type="text/javascript">
+        jQuery("#vina-treeview-virtuemart136 ul").treeview({
+        animated:   "normal",
+        persist:    "cookie",
+        collapsed:  true,
+        unique:     false,
+        });
+        </script> -->
+
+      </div>
+    </div>
+  </div> 
+</div>
+
+<%#= console %>

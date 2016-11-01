@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-sm-7">
+    <%#= image_tag(chi(@component), width: "450", id: "component_image") if Rails.env.production? %>
+    <div id="breadcrumbs"><%= render :partial => "layouts/breadcrumbs" %></div> 
+    <%= render :partial => "layouts/modal_component_image" %>
+    <%= render :partial => "layouts/caroussel_mini2", locals: { list: @component.images } if @component.images.size > 1 %>
+  </div>
+
+  <div class="col-md-5 text-align-center font-size16">
+    <h4 class=""><i><%= @component.title %></i></h4>
+    <% unless @component.categories.blank? %>
+      <div class="row bottom-margin20">      
+        <div class="table-responsive">
+          <table class="table text-align-left">
+            <tbody>
+              <% @component.categories.each_pair do |key, value| %>
+                <% value.each_with_index do |el, index| %>
+                  <tr>
+                    <td><%= (index == 0) ? (component_category_type key) : "" %></td>
+                    <td><%= component_category_value el %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+
+              <% if @component.component_types.first && ComponentCategoryType.where(component_type_id: @component.component_types.first.id).where(has_sizerange: true).first %>
+              <tr>
+                <td>Размеры</td>
+                <td><%= (@component.sizerange && !@component.sizerange.blank?) ? "#{@component.sizerange.min}-#{@component.sizerange.max}" : "-" %></td>
+              </tr>
+              <% end %>
+
+            </tbody>
+          </table>
+        </div>      
+      </div> 
+    <% end %>
+
+    <% unless @component.component_subtypes.blank? %>
+      <div class="row bottom-margin20">      
+        <div class="table-responsive">
+          <table class="table text-align-left">
+            <tbody>
+                <tr>
+                  <td>Характеристика товара</td>
+                  <td><%= @component.component_subtypes.first.title %></td>
+                </tr>
+            </tbody>
+          </table>
+        </div>      
+      </div> 
+    <% end %>  
+
+    <div class="row bottom-margin20">
+      <% unless @component.description.blank? %>
+        <strong>О товаре:</strong>
+        <div class="text-align-left margin-top10 tinymce-component">            
+          <%= @component.description.html_safe %>
+        </div>
+      <% end %>
+    </div>   
+
+    <div class="row bottom-margin20">
+      <div class="col-md-8 col-md-offset-2">
+        <%= link_to "Оформить заявку", new_order_path, class:"btn green-button button-height"%>
+      </div>
+    </div>
+
+    <div class="row">
+      <div id="" class="col-md-8 col-md-offset-2 text-align-left">
+        Вы можете заказать этот продукт по телефонам: <br><br>(863) 236-95-93 <br><br>8-928-227-03-07 (Алексей)<br><br>8 (909) 404-82-64 (Инна)<br><br> E-mail: vostokshoes@yandex.ru
+      </div>
+    </div>
+
+  </div>    
+</div>
+
+<div class="row margin-top30">
+
+  <% if @components.size > 0 %>
+    <h3 class="align-center">Рекомендуем</h3>
+  <% end %>
+
+  <%#= render :partial => "layouts/caroussel", locals: { list: @components, slides_to_show: 4, slider_image_width: 180, slider_width: 800 } %>
+
+</div>

@@ -1,0 +1,25 @@
+<h2>Выслать снова инструкции по подтверждению учётной записи</h2>
+
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class:"form-horizontal" }) do |f| %>
+  <%= devise_error_messages! %>
+
+	<div class="form-group">
+	  <div class="field">
+	    <%= f.label "Электронная почта", class: "col-sm-3 control-label nowrap" %>
+	    <div class="col-sm-6">
+	    <%= f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control", placeholder: "Электронная почта" %>
+		</div>
+	  </div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-3 col-sm-9 actions">
+		  <%= f.submit "Выслать снова инструкции по подтверждению учётной записи", class:"green-button button-height" %>
+		</div>
+	</div>
+
+<% end %>
+
+<div class="col-sm-offset-3 col-sm-8 actions green-link-block">
+	<%= render "devise/shared/links" %>
+</div>

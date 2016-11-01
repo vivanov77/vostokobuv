@@ -1,0 +1,84 @@
+<% content_for :menu_padding do %>
+
+  <div class="col-sm-4">
+
+    <strong>Наименование:</strong>
+    <p>
+      <%= @shoe.title %>
+    </p>
+
+    <strong>Производитель:</strong>
+    <p>  
+      <%= @shoe.user ? (link_to @shoe.user.organization, @shoe.user) : "Нет производителя" %>
+    </p>
+
+    <strong>Описание:</strong>
+    <p>  
+      <%= @shoe.description %>
+    </p>
+
+    <strong>Изображение</strong>
+    <p>  
+      <%= image_tag("0.jpg", width: '120', height: '120') %>
+    </p>
+
+  </div>
+
+  <div class="col-sm-5">
+
+    <% unless @shoe.categories.blank? %>
+    <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Подраздел</th>
+          <th>Компонент: Обувь</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @shoe.categories.each_pair do |key, value| %>
+          <tr>
+            <td><%= category_type key %></td>
+            <td><%= category_value value %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+    <% end %>
+
+  </div>
+
+<% end %>
+
+<% if @shoe.user %>
+
+<h3 class="align-center">Обувь этого производителя</h3>
+
+<div class="row">
+  <%= render :partial => "layouts/caroussel", locals: { list: @shoe.user.shoes } %>
+</div>
+
+<h4>Отзывы о производителе</h3>
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Отзывы</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @opinions.each do |opinion| %>
+      <tr>
+        <td><%= opinion.optext %></td>       
+       </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<%= render 'opinions/form', opinion: Opinion.new,  user_id: @shoe.user_id %>
+
+<% end %>

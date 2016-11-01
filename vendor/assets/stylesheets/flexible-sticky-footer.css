@@ -1,0 +1,26 @@
+/*http://stackoverflow.com/questions/4347133/css-sticky-footers-with-unknown-height*/
+/*https://pixelsvsbytes.com/2011/09/sticky-css-footers-the-flexible-way/*/
+
+html, body {
+	height: 100%; 
+	padding: 0; 
+	margin: 0; 
+}
+
+body { 
+	display: table; 
+	width: 100%; 
+	height: 100%; 
+}
+
+.flexible-footer, .flexible-footer-wrapper { 
+	display: table-row; 
+}
+
+.flexible-footer { 
+	height: 1px; 
+}
+
+.flexible-footer-wrapper { 
+	height: auto; 
+}

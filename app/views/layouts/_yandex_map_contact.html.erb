@@ -1,0 +1,90 @@
+<div id="ymap_container" style="display:none">
+<hr>
+
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
+<script type="text/javascript">
+  ymaps.ready(init);
+  var myMap, 
+  myPlacemark;
+
+  function init(){ 
+
+// https://tech.yandex.ru/maps/doc/jsapi/2.1/ref/reference/Map-docpage/
+// Инициализация карты из результата геокодирования
+// var myMap;
+  ymaps.geocode("<%= contact %>").then(function (res) {
+  // Выведем в консоль данные, полученные в результате геокодирования объекта.
+
+  // console.log(res.metaData.geocoder.found);
+
+  if (res.metaData.geocoder.found > 0) {
+
+    $("#ymap_container").show();
+
+    set_sticky_panel(); // requires "fixed_menu.js"
+  }
+       
+    
+  myMap = new ymaps.Map('map', {
+    center: res.geoObjects.get(0).geometry.getCoordinates(),
+    zoom : 16,        
+        // Карта будет создана без                
+        // элементов управления. 
+        controls: []
+      });
+
+  myPlacemark = new ymaps.Placemark(res.geoObjects.get(0).geometry.getCoordinates(), 
+    {
+      iconCaption: "<%= contact %>"
+    },
+
+    {
+      preset: 'islands#redDotIconWithCaption',
+// https://yandex.ru/blog/mapsapi/pochemu-inogda-masshtabiruet-kartu-na-samoe-dalnoe-rasstoyanie      
+      iconCaptionMaxWidth: "1000"
+    }              
+  );   
+  
+  myMap.geoObjects.add(myPlacemark);
+
+
+// // Создаем геообъект с типом геометрии "Точка".
+//   myGeoObject = new ymaps.GeoObject({
+//       // Описание геометрии.
+//       geometry: {
+//           type: "Point",
+//           coordinates: res.geoObjects.get(0).geometry.getCoordinates()
+//       },
+//       // Свойства.
+//       properties: {
+//           // Контент метки.
+//           iconContent: "<%#= @producer.contact %>",
+//           // hintContent: 'Ну давай уже тащи'
+//       }
+//   }, {
+//       // Опции.
+//       // Иконка метки будет растягиваться под размер ее содержимого.
+//       preset: 'islands#greenStretchyIcon',
+//       // Метку можно перемещать.
+//       draggable: true
+//   });
+  
+//   myMap.geoObjects.add(myGeoObject);
+
+
+},
+function (err) {
+        // обработка ошибки
+        // alert("Yandex map error");
+    }
+);
+
+}
+</script>
+
+<div id="map" style="width: 600px; height: 400px"></div>
+
+<br />
+<hr>
+</div>

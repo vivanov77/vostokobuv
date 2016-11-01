@@ -1,0 +1,41 @@
+<strong>Наименование:</strong>
+<p>
+  <%= @shoe.title %>
+</p>
+
+<strong>Производитель:</strong>
+<p>  
+  <%= @shoe.user.organization %>
+</p>
+
+<strong>Описание:</strong>
+<p>  
+  <%= @shoe.description %>
+</p>
+
+<% unless @shoe.categories.blank? %>
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Подраздел</th>
+      <th>Компонент: Обувь</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shoe.categories.each_pair do |key, value| %>
+      <tr>
+        <td><%= category_type key %></td>
+        <td><%= category_value value %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<% end %>
+
+<%= render 'layouts/uploaded_images', param: @shoe %>
+
+<%= link_to 'Редактировать', edit_admin_shoe_path(@shoe) %> | 
+<%= link_to 'Назад', admin_shoes_path %>

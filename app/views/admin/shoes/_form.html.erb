@@ -1,0 +1,53 @@
+<%= form_for([:admin, shoe], :html => { :multipart => true }) do |f| %>
+  <% if shoe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(shoe.errors.count, "error") %> prohibited this shoe from being saved:</h2>
+
+      <ul>
+      <% shoe.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Наименование" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Описание" %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Производитель" %><br />
+    <%= f.collection_select :user_id, User.where(producer: true).order(:organization), :id, :organization,
+  # http://guides.rubyonrails.org/form_helpers.html#select-boxes-for-dealing-with-models
+                  prompt: 'Выберите производителя' %>          
+  </div>    
+
+  <div class="field">
+  <%= f.label :categories %>
+
+    <% CategoryType.all.each do |category| %><br />
+      <div><%= category.title %></div>
+      <%= f.fields_for :categories do |ff| %>
+        <%= ff.collection_select category.id, CategoryValue.order(:title).where(category_type: category), :id, :title,
+  # http://guides.rubyonrails.org/form_helpers.html#select-boxes-for-dealing-with-models
+  # http://guides.rubyonrails.org/form_helpers.html#using-form-helpers
+  # http://stackoverflow.com/questions/10449101/rails-adding-options-to-collection-select
+          shoe.categories.blank? || shoe.categories[category.id.to_s].blank? ? {:include_blank => "Ничего не выбрано"} : {:include_blank => "Ничего не выбрано", :selected => shoe.categories[category.id.to_s]}                  
+                  %>
+      <% end %><br />
+    <% end %>
+  </div>
+  <br />
+
+  <%= render 'layouts/uploaded_images', param: f %>
+
+   <div class="actions">
+    <%= f.submit submit_russian_text "Обувь" %>
+  </div>
+<% end %>

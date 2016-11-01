@@ -1,0 +1,41 @@
+<form id="form1">
+
+<div style="padding:20px">
+
+<select id="chkveg" multiple="multiple">
+
+    <option value="cheese">Cheese</option>
+    <option value="tomatoes">Tomatoes</option>
+    <option value="mozarella">Mozzarella</option>
+    <option value="mushrooms">Mushrooms</option>
+    <option value="pepperoni">Pepperoni</option>
+    <option value="onions">Onions</option>
+
+</select>
+
+<br /><br />
+
+<input type="button" id="btnget" value="Применить" />
+
+</div>
+
+</form>
+
+
+<script type="text/javascript">
+
+$(function() {
+
+    $('#chkveg').multiselect({
+
+        // includeSelectAllOption: true
+        numberDisplayed: 1
+    });
+
+    $('#btnget').click(function(){
+
+        alert($('#chkveg').val());
+    });
+});
+
+</script>

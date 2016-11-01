@@ -1,0 +1,70 @@
+<%= form_for(order, :html => {class:"form-horizontal"}) do |f| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <div class="field">
+      <%= f.label "Имя", class: "col-sm-2 control-label nowrap" %>
+      <div class="col-sm-4">
+      <%= f.text_field :name, class: "form-control", placeholder: "Имя" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="field">
+      <%= f.label "Город", class: "col-sm-2 control-label nowrap" %>
+      <div class="col-sm-4">
+      <%= f.text_field :city, class: "form-control", placeholder: "Город" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="field">
+      <%= f.label "Электронная почта", class: "col-sm-2 control-label nowrap" %>
+      <div class="col-sm-4">
+      <%= f.email_field :email, class: "form-control", placeholder: "Электронная почта" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="field">
+      <%= f.label "Телефон", class: "col-sm-2 control-label nowrap" %>
+      <div class="col-sm-4">
+      <%= f.text_field :phone, class: "form-control", placeholder: "Телефон" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="field">
+      <%= f.label "Содержимое", class: "col-sm-2 control-label nowrap" %>
+      <div class="col-sm-6">
+      <%= f.text_area :content, class: "form-control text-area-order", placeholder: "Содержимое" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6 actions">
+      <div id="RecaptchaField2"></div><%= hidden_field_tag :grecaptcha %>
+    </div>
+  </div>  
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+      <%= f.submit submit_russian_text("Заказ"), class:"green-button button-height" %>
+    </div>
+  </div>
+<% end %>

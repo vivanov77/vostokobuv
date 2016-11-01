@@ -1,0 +1,24 @@
+<!-- <p>Welcome <%#= @email %>!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p><%#= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p> -->
+
+<p>
+  <%= image_tag(attachments['0.jpg'].url, width: '193', height: '112') %>
+  <%#= image_tag(attachments['0.jpg'].url, width: '290', height: '168') %>
+  <%#= image_tag(attachments['0.jpg'].url, width: '120', height: '120') %>  
+  <%#= image_tag(attachments['0.jpg'].url, style: "width:90px; height:90px; -webkit-border-radius:50%; border-radius:50%; background-size:100%;") %>	
+</p>
+
+<p><%= @email %>, добро пожаловать на сайт <a href="http://xn----btbbc1bxacxkq3i.xn--p1ai/">Восток-обувь.рф</a>!</p>
+
+<p>Прежде чем начать работу, подтвердите свой адрес электронной почты, нажав на ссылку ниже.</p>
+
+<p>
+<%#= link_to 'Подтвердить email', confirmation_url(@resource, confirmation_token: @token), class: "btn btn-default btn-lg" %>
+
+<%= link_to 'Подтвердить email', confirmation_url(@resource, confirmation_token: @token), style: "-moz-box-sizing: border-box;-moz-user-select: none;-ms-touch-action: manipulation;-ms-user-select: none;-webkit-box-shadow: none !important;-webkit-box-sizing: border-box;-webkit-user-select: none;background: #337ab7 none;border: 1px solid #2e6da4;border-radius: 6px;box-shadow: none !important;box-sizing: border-box;color: #fff !important;cursor: pointer;display: inline-block;font-size: 18px;font-weight: 400;line-height: 1.3333333;margin-bottom: 0;padding: 10px 16px;text-align: center;text-decoration: none;text-shadow: none !important;touch-action: manipulation;user-select: none;vertical-align: middle;white-space: nowrap;" %>	
+</p>
+
+<p>Если вы не регистрировались на нашем сайте, просто проигнорируйте это сообщение. При возникновении проблем или вопросов свяжитесь с нами по адресу <a href="mailto:support@восток-обувь.рф">support@восток-обувь.рф</a></p>

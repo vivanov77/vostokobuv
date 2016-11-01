@@ -1,0 +1,6 @@
+<h1>Редактирование Компонента: Обувь</h1>
+
+<%= render 'form', category_value: @category_value %>
+
+<%= link_to 'Показать', [:admin, @category_value] %> |
+<%= link_to 'Назад', admin_category_values_path %>

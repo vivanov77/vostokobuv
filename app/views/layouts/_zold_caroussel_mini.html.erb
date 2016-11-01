@@ -1,0 +1,21 @@
+<script language="javascript">
+    function changeImage(url) {
+
+    	$("#component_image")[0].src = url;
+
+    	return false;
+    }
+</script>
+
+<section class="regular-slider-3 slider-mini">
+  <% list.each do |item| %>
+
+	  <a class="tile-href" onclick='changeImage("<%= item.file_url %>")'>
+      <%= image_tag(item.file_url, class:"tile-image") %>
+	  </a>
+
+  <% end %>
+</section>
+
+
+

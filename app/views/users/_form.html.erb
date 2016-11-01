@@ -1,0 +1,230 @@
+
+<% if @type == "user_news" %>
+  <h1>Управление новостями</h1>
+<% elsif @type == "data" %>
+  <h1>Данные пользователя</h1>
+<% else %>
+  <h1>Тип пользователя</h1>
+<% end %>
+
+<%= form_for(@user, html: { class: "form-horizontal" }) do |f| %>
+<% if @user.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<% if @type == "user_news" %>
+
+  <div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Пользователь</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% f.object.user_news.each do |user_news| %>
+        <tr>
+          <td><%= user_news.title %></td>
+          <td><%= user_news.user.organization %></td>
+          <td><%= link_to 'Показать', user_news %></td>
+          <td><%= link_to 'Редактировать', edit_user_news_path(user_news) %></td>
+          <td><%= link_to 'Удалить', user_news, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+
+  <br>
+
+  <%#= link_to 'New User News', new_user_news_path(user_id: f.object.id) %>
+  <%= link_to 'Новая пользовательская новость', edit_user_path(f.object, type: :new_user_news) %><br>
+
+  <%= hidden_field_tag :type, :user_news %> 
+
+<% elsif @type == "new_user_news" %>
+
+  <%= f.fields_for :user_news, UserNews.new do |ff| %>  
+
+    <%= f.label "Наименование" %>
+    <%= ff.text_field :title %><br><br>
+
+    <%= ff.text_area :content, :class => "tinymce", :rows => 40, :cols => 120 %>
+
+  <% end %>
+
+  <%= hidden_field_tag :type, :new_user_news %> 
+
+
+<% elsif @type == "data" %>
+
+  <div class="filters">
+    <%= f.label (@user.producer ? "Вы - производитель" : "Вы - покупатель"), {style: "float:left; margin-right:10px;"} %>
+    <%= link_to "(изменить)", edit_user_path(current_user) %>
+  </div>
+
+  <fieldset>
+  <legend>Личные данные</legend>
+
+  <div class="form-group">
+    <%= f.label "Имя", class: "col-sm-1 control-label nowrap" %>
+    <div class="col-sm-2">
+      <%= f.text_field :first_name, class: "form-control", placeholder: "Имя" %>
+    </div>
+
+    <%= f.label "Отчество", class: "col-sm-2 control-label nowrap" %>
+    <div class="col-sm-2 ">
+      <%= f.text_field :middle_name, class: "form-control", placeholder: "Отчество" %>
+    </div>
+
+    <%= f.label "Фамилия", class: "col-sm-2 control-label nowrap" %>
+    <div class="col-sm-2">
+      <%= f.text_field :last_name, class: "form-control", placeholder: "Фамилия" %>
+    </div>
+  </div>  
+
+  <div class="form-group">
+    <%= f.label "Электронная почта", class: "col-sm-1 control-label" %>
+    <div class="col-sm-3">
+      <%= f.email_field :email, class: "form-control", placeholder: "Электронная почта" %>
+    </div>
+
+    <%= f.label "Телефон", class: "col-sm-1 control-label" %>
+    <div class="col-sm-3">
+      <%= f.text_field :phone, class: "form-control", placeholder: "Телефон" %>
+    </div>
+
+  </div>
+
+  </fieldset>
+    <br>
+    <fieldset>
+    <legend><%= current_user.producer ? "Контактные данные организации" : "Данные организации" %></legend>    
+
+    <div class="form-group">
+      <%= f.label "Организация", class: "col-sm-2 control-label" %>
+      <div class="col-sm-3">
+        <%= f.text_field :organization, class: "form-control", placeholder: "Организация" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label "Город", class: "col-sm-2 control-label" %>
+      <div class="col-sm-3">
+        <%= f.text_field :city, class: "form-control", placeholder: "Город" %>
+      </div>
+    </div> 
+
+    <div class="form-group">
+      <%= f.label "Адрес", class: "col-sm-2 control-label" %>
+      <div class="col-sm-3">
+        <%= f.text_field :address, class: "form-control", placeholder: "Адрес" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label "Телефон организации", class: "col-sm-2 control-label" %>
+      <div class="col-sm-3">
+        <%= f.text_field :phone_organization, class: "form-control", placeholder: "Телефон организации" %>
+      </div>
+    </div>    
+
+  </fieldset>  
+
+  <% if current_user.producer %>
+
+    <div class="form-group">
+      <%= f.label "Контактное лицо", class: "col-sm-2 control-label" %>
+      <div class="col-sm-4">
+        <%= f.text_field :contact, class: "form-control", placeholder: "Контактное лицо" %>
+      </div>
+    </div>  
+
+    <div class="form-group">
+      <%= f.label "Сайт-визитка", class: "col-sm-2 control-label" %>
+      <div class="col-sm-4">
+        <%= f.text_field :url_name, class: "form-control", placeholder: "Сайт-визитка" %>
+      </div>
+    </div>
+
+    <div class="form-group ">
+      <div class="col-sm-2 control-label">
+        <%= render 'layouts/uploaded_images', param: f, logo: true %>  
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label "О компании", class: "col-sm-2 control-label" %>
+      <div class="col-sm-4">
+        <%= f.text_area :description, class: "form-control", placeholder: "О компании" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label "Условия доставки", class: "col-sm-2 control-label" %>
+      <div class="col-sm-4">
+        <%= f.text_field :delivery_info, class: "form-control", placeholder: "Условия доставки" %>
+      </div>
+    </div>
+   
+  <% end %>
+
+  <div class="checkbox">
+    <label>
+      <%= f.check_box :subscribe_news_shoes %> Подписаться на новости об обуви
+    </label>
+  </div>
+
+  <div class="checkbox">
+    <label>
+      <%= f.check_box :subscribe_news_components %> Подписаться на новости о товарах
+    </label>
+  </div>
+  <br>
+
+<% else %>
+<!-- http://stackoverflow.com/questions/14857909/lining-up-labels-with-radio-buttons-in-bootstrap -->
+<!-- http://stackoverflow.com/a/25860544/6594668 -->
+
+  <div class="form-group">
+    <div class="field">
+      <div class="col-sm-6">
+
+        <div class="radio">
+          <label>
+            <%= f.radio_button :producer, false %> Вы - покупатель
+          </label>
+        </div>
+
+        <div class="radio">
+          <label>
+            <%= f.radio_button :producer, true %> Вы - производитель
+          </label>
+        </div>
+
+      </div>
+  </div>
+</div>
+
+<% end %>
+
+<% unless @type == "user_news" %>
+
+  <div class="col-sm-7 actions">
+    <%= f.submit "Сохранить пользователя", class:"green-button button-height" %>
+  </div>
+
+<% end %>
+
+<% end %>

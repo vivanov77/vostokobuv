@@ -1,0 +1,17 @@
+<p>
+  <strong>Наименование:</strong>
+  <%= @news.title %>
+</p>
+
+<p>
+  <strong>Содержимое:</strong>
+  <%= @news.content %>
+</p>
+
+<p>
+  <strong>Отправлено:</strong>
+  <%= @news.sent %>
+</p>
+
+<%= link_to 'Редактировать', edit_news_path(@news) %> | 
+<%= link_to 'Назад', admin_news_index_path %>

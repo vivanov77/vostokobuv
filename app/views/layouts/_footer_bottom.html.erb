@@ -1,0 +1,31 @@
+<div class="footer-bottom">
+	<div class="valign-middle-parent float-left">
+		<div class="footer-item">
+		  <div class="footer-item-phone">8 (863) 236-95-93, &nbsp;&nbsp;&nbsp;8 (928) 227-03-07 (Алексей), &nbsp;&nbsp;&nbsp;8 (909) 404-82-64 (Инна)</div>	  
+		</div>
+	</div>
+	<div class="valign-middle-parent float-left">	
+		<div class="footer-item">
+			<div class="footer-item-email">vostokshoes@yandex.ru</div>
+		</div>
+	</div>
+	<% if Configurable[:faq] != "nil" && !Configurable[:faq].blank? %>
+	<div class="valign-middle-parent float-left">	
+		<div class="footer-item">
+			<div class="footer-item-info"><%= link_to "Часто задаваемые вопросы", faq_path %></div>
+		</div>
+	</div>
+	<% end %>
+	<% if Configurable[:delivery] != "nil" && !Configurable[:delivery].blank? %>
+	<div class="valign-middle-parent float-left">	
+		<div class="footer-item">
+			<div class="footer-item-info"><%= link_to "Доставка", delivery_path %></div>
+		</div>
+	</div>
+	<% end %>
+	<div class="valign-middle-parent float-right">
+		<div class="footer-item">
+		  &copy; ООО "Восток"
+		</div>
+	</div>
+</div>

@@ -1,0 +1,6 @@
+<h1>Редактирование Компонента: Комплектующие</h1>
+
+<%= render 'form', component_category_value: @component_category_value %>
+
+<%= link_to 'Показать', [:admin, @component_category_value] %> |
+<%= link_to 'Назад', admin_component_category_values_path %>

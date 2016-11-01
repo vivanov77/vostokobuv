@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  
+  <title>ООО "Восток-Обувь"</title>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <%#= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>  
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag 'sirius32.ico' %>
+    <script src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit&hl=ru"
+    async defer>
+  </script>
+</head>
+<body>
+
+<div class="container-fluid flexible-footer-wrapper">
+
+  <%#= render :partial => "layouts/theme" %>
+  <% if heroku? %>
+    <a href="<%= reset_path %>">Восстановить исходные данные сайта</a>
+  <% end %>
+
+  <%= render :partial => "layouts/logo" %>
+
+  <div class="container"> <!-- theme's class, not bootstrap's -->
+
+    <%= render :partial => "layouts/flash_messages" %>
+
+    <% if ( no_vert_menu_page?) %>
+      <%= yield %>
+    <% else %>
+      <div class="row">
+
+        <div class="col-sm-3">
+          <%= render :partial => "layouts/vert_menu", locals: { list: (profile_pages? ? @menu_profile : (shoes_pages? ? @menu_shoes : @menu_components)), menu_title: (profile_pages? ? "Профиль" : (shoes_pages? ? "Обувь" : "Товары")), remote: vert_menu_remote? } %>
+        </div>
+
+        <div class="col-sm-9">
+          <%= yield %>
+        </div>
+
+      </div>
+    <% end %> 
+
+    <div class="top-margin"></div>
+
+    <%= render :partial => "layouts/components_footer1" if (root_page? || components_root_page? )%>
+
+    </div>
+  </div>
+
+<%= render :partial => "layouts/to_top" %>
+
+</div>
+
+<div class="flexible-footer">
+
+  <%= render :partial => "layouts/components_footer2" %>
+
+  <%= render :partial => "layouts/footer_bottom" %>
+
+</div>
+ 
+</body>
+</html>
+
+<%#= console %>

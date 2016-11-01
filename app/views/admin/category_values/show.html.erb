@@ -1,0 +1,19 @@
+<p>
+  <strong>Наименование:</strong>
+  <%= @category_value.title %>
+</p>
+
+<p>
+  <strong>Наименование подраздела:</strong>
+  <%= @category_value.category_type.blank? ? "nil" : @category_value.category_type.title %>
+</p>
+
+<p>
+  <strong>Публичный:</strong>
+  <%= @category_value.public %>
+</p>
+
+<%= render 'layouts/uploaded_images', param: @category_value %>
+
+<%= link_to 'Редактировать', edit_admin_category_value_path(@category_value) %> | 
+<%= link_to 'Назад', admin_category_values_path %>

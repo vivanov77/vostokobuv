@@ -1,0 +1,25 @@
+var CaptchaCallback = function(){
+	var widgetId;
+
+// http://stackoverflow.com/questions/7451517/using-a-rails-helper-method-within-a-javascript-asset
+	// <%# environment.context_class.instance_eval { include ApplicationHelper } %>
+
+// http://stackoverflow.com/questions/1241947/how-do-i-show-multiple-recaptchas-on-a-single-page
+    $('[id^=RecaptchaField]').each(function(index, el) {
+
+    	 widgetId = grecaptcha.render(el.id, {'sitekey' : "<%= ENV['DYNO'].blank? ? Rails.application.secrets.RECAPTCHA_PUBLIC_KEY : ENV['RECAPTCHA_PUBLIC_KEY'] %>"});
+         // $(el).attr('widgetId', widgetId);
+         // $(el).addClass('recaptcha');
+
+// http://stackoverflow.com/questions/22373630/refresh-dom-after-append-element
+// http://stackoverflow.com/questions/1621714/jquery-find-parent-form
+         $(el).closest("form").submit(function( event ) {
+
+         	this.grecaptcha.value = "{\"" + index + "\" => \"" + grecaptcha.getResponse(widgetId) + "\"}"
+
+         });
+    });
+};
+
+// https://bugzilla.mozilla.org/show_bug.cgi?id=1273097
+// Google recaptcha does not work in Firefox on Cyrillic domains

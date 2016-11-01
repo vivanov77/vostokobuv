@@ -1,0 +1,14 @@
+<%=
+base = "#{Rails.root}/app/assets/images/"
+
+images = Dir.glob(base + "fon/*.*")
+
+select(nil, nil, images.collect {|p| [p.slice(base.size+"fon/".size, p.size), asset_path(p.slice(base.size, p.size)) ] }, {include_blank: "Выберите узор"},{ onchange: "getval(this);" })
+%>
+
+<script type="text/javascript">
+    function getval(sel) {
+        $('.container-fluid').css('background-image', 'url(' + sel.value + ')');
+      }
+
+</script>

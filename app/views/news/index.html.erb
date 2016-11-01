@@ -1,0 +1,31 @@
+<h1 class="page-header">Новости</h1>
+
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Наименование</th>
+      <th>Содержимое</th>
+      <th>Отправлено</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @news.each do |news| %>
+      <tr>
+        <td><%= news.title %></td>
+        <td><%= news.content %></td>
+        <td><%= news.sent %></td>
+        <td><%= link_to 'Показать', news %></td>
+        <td><%= link_to 'Редактировать', edit_news_path(news) %></td>
+        <td><%= link_to 'Удалить', news, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<br>
+
+<%= link_to 'Новая новость', new_news_path %>

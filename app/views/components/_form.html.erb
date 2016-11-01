@@ -1,0 +1,59 @@
+<%= form_for([:admin, component]) do |f| %>
+  <% if component.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(component.errors.count, "error") %> prohibited this component from being saved:</h2>
+
+      <ul>
+      <% component.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Название" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Раздел" %>
+    <%= f.collection_select :component_type_ids, ComponentType.order(:title), :id, :title,
+  # http://guides.rubyonrails.org/form_helpers.html#select-boxes-for-dealing-with-models
+  # http://guides.rubyonrails.org/form_helpers.html#using-form-helpers
+                  :prompt => 'Выберите раздел' %>
+
+  </div>
+
+  <div class="field">
+  <!-- http://stackoverflow.com/questions/5319400/want-to-find-records-with-no-associated-records-in-rails-3 -->
+  <!-- http://apidock.com/rails/ActionView/Helpers/FormOptionsHelper/grouped_collection_select -->
+    <%= f.label "Подраздел" %>
+      <%= f.grouped_collection_select(:component_subtype_ids, ComponentType.includes(:component_subtypes).where.not(:component_subtypes => { :component_type_id => nil } ).order(:title), :component_subtypes, :title, :id, :title, {:include_blank => "Ничего не выбрано"})
+      %>
+  </div>  
+
+  <div class="field">
+  <%= f.label :categories if component.categories %>
+
+    <% ComponentCategoryType.where(component_type: component.component_types.first).each do |component_category| %>
+    <br />
+      <div><%= component_category.title %></div>
+      <%= f.fields_for :categories do |ff| %>
+        <%= ff.collection_select component_category.id, ComponentCategoryValue.order(:title).where(component_category_type: component_category), :id, :title,
+  # http://guides.rubyonrails.org/form_helpers.html#select-boxes-for-dealing-with-models
+  # http://guides.rubyonrails.org/form_helpers.html#using-form-helpers
+                  # :prompt => 'Select a Компонент: Обувь'
+# http://stackoverflow.com/questions/10449101/rails-adding-options-to-collection-select
+          component.categories.blank? || component.categories[component_category.id.to_s].blank? ? {:include_blank => "Ничего не выбрано"} : {:include_blank => "Ничего не выбрано", :selected => component.categories[component_category.id.to_s]}                  
+        %>
+      <% end %><br />
+    <% end %>
+  </div><br />  
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Товар" %>
+  </div>
+<% end %>
+
+<%# console %>

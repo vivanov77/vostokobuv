@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Свежие новости о нашей обуви</h1>
+    <p>
+      Пользователь <%= @user.email %>, мы хотели бы представить Вам новинки из числа нашей обуви.
+    </p>
+    <% @shoes.each do |shoe| %>
+        <p><%= shoe.title %></p>
+    <% end %>
+  </body>
+</html>

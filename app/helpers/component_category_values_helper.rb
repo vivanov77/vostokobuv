@@ -1,0 +1,2 @@
+module ComponentCategoryValuesHelper
+end

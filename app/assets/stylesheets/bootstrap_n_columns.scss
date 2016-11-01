@@ -1,0 +1,218 @@
+// http://stackoverflow.com/questions/10387740/five-equal-columns-in-twitter-bootstrap
+
+$factor: 31; // Set here the overall amount of columns
+
+$fraction: 100 / $factor;
+
+.factor {
+  data-factor: $factor;
+}
+
+// http://stackoverflow.com/questions/39615456/scss-how-to-concatenate-rules-with-the-same-style
+%v1 {
+  position: relative;
+  min-height: 1px;
+  // padding-right: 15px;
+  // padding-left: 15px;  
+}
+
+@for $i from 1 through $factor {
+  .coln-xs-#{$i}, .coln-sm-#{$i}, .coln-md-#{$i}, .coln-lg-#{$i} { 
+    @extend %v1;
+  }
+}
+
+%v2 {
+  float: left; 
+}
+
+@for $i from 1 through $factor {
+  .coln-xs-#{$i} { 
+    @extend %v2;
+  }
+}
+
+@for $i from 0 through $factor - 1 {
+  .coln-xs-#{$factor - $i} { 
+  width: 100% - $fraction * $i;
+  }
+}
+
+@for $i from 0 through $factor - 1 {
+  .coln-xs-pull-#{$factor - $i} { 
+  right: 100% - $fraction * $i;
+  }
+}
+
+.coln-xs-pull-0 {
+  right: auto;
+}
+
+@for $i from 0 through $factor - 1 {
+  .coln-xs-push-#{$factor - $i} { 
+  left: 100% - $fraction * $i;
+  }
+}
+
+.coln-xs-push-0 {
+  left: auto;
+}
+
+@for $i from 0 through $factor - 1 {
+  .coln-xs-offset-#{$factor - $i} { 
+  margin-left: 100% - $fraction * $i;
+  }
+}
+
+.coln-xs-offset-0 {
+  margin-left: 0;
+}
+
+
+@media (min-width: 768px) {
+
+  %v3 {
+  float: left; 
+  }
+
+  @for $i from 1 through 15 {
+    .coln-sm-#{$i} { 
+    @extend %v3;
+    }
+  }
+
+  @for $i from 0 through $factor - 1 {
+    .coln-sm-#{$factor - $i} { 
+    width: 100% - $fraction * $i;
+    }
+  }
+
+  @for $i from 0 through $factor - 1 {
+    .coln-sm-pull-#{$factor - $i} { 
+    right: 100% - $fraction * $i;
+    }
+  }
+
+  .coln-sm-pull-0 {
+    right: auto;
+  }
+
+  @for $i from 0 through $factor - 1 {
+    .coln-sm-push-#{$factor - $i} { 
+    left: 100% - $fraction * $i;
+    }
+  }
+
+  .coln-sm-push-0 {
+    left: auto;
+  }
+
+  @for $i from 0 through $factor - 1 {
+    .coln-sm-offset-#{$factor - $i} { 
+    margin-left: 100% - $fraction * $i;
+    }
+  }
+
+  .coln-sm-offset-0 {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 992px) {
+
+  %v4 {
+  float: left; 
+  }  
+
+  @for $i from 1 through 15 {
+    .coln-md-#{$i} { 
+    @extend %v4;
+    }
+  }
+
+  @for $i from 0 through $factor - 1 {
+    .coln-md-#{$factor - $i} { 
+    width: 100% - $fraction * $i;
+    }
+  }
+
+  @for $i from 0 through $factor - 1 {
+    .coln-md-pull-#{$factor - $i} { 
+    right: 100% - $fraction * $i;
+    }
+  }
+
+  .coln-md-pull-0 {
+    right: auto;
+  }
+
+  @for $i from 0 through $factor - 1 {
+    .coln-md-push-#{$factor - $i} { 
+    left: 100% - $fraction * $i;
+    }
+  }
+
+  .coln-md-push-0 {
+    left: auto;
+  }
+
+  @for $i from 0 through $factor - 1 {
+    .coln-md-offset-#{$factor - $i} { 
+    margin-left: 100% - $fraction * $i;
+    }
+  }
+
+  .coln-md-offset-0 {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  %v5 {
+  float: left; 
+  }  
+
+  @for $i from 1 through 15 {
+    .coln-lg-#{$i} { 
+    @extend %v5;
+    }
+  }
+
+  @for $i from 0 through $factor - 1 {
+    .coln-lg-#{$factor - $i} { 
+    width: 100% - $fraction * $i;
+    }
+  }
+
+  @for $i from 0 through $factor - 1 {
+    .coln-lg-pull-#{$factor - $i} { 
+    right: 100% - $fraction * $i;
+    }
+  }
+
+  .coln-lg-pull-0 {
+    right: auto;
+  }
+
+  @for $i from 0 through $factor - 1 {
+    .coln-lg-push-#{$factor - $i} { 
+    left: 100% - $fraction * $i;
+    }
+  }
+
+  .coln-lg-push-0 {
+    left: auto;
+  }
+
+  @for $i from 0 through $factor - 1 {
+    .coln-lg-offset-#{$factor - $i} { 
+    margin-left: 100% - $fraction * $i;
+    }
+  }
+
+  .coln-lg-offset-0 {
+    margin-left: 0;
+  }
+
+}

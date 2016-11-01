@@ -1,0 +1,85 @@
+<h1 class="page-header">Изображения</h1>
+
+<div class="table-responsive">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th colspan="3">Родитель изображения</th>      
+      <th colspan="4"></th>
+    </tr>
+    <tr>
+      <th>Id</th>
+      <th>Parent Id</th>
+      <th>Parent Type</th>
+      <th></th>
+<!--       <th>Существует?</th>
+      <th>Миниатюра 150?</th>
+      <th>Миниатюра 180?</th>
+      <th>Миниатюра 250?</th>
+      <th>Миниатюра 370?</th>
+      <th>Миниатюра 450?</th>
+      <th>Миниатюра 570?</th> -->
+      <th colspan="2"></th>
+    </tr>    
+  </thead>
+
+  <tbody>
+    <% @images.each do |image| %>
+      <tr>
+        <td><%= image.id %></td>
+        <td><%= image.imageable_id ? image.imageable_id : "Не указано" %></td>
+        <td><%= image.imageable_type %></td>
+<!-- http://stackoverflow.com/questions/9596168/how-to-dynamically-call-routes-helper-in-rails         -->
+        <td><%= image.imageable_id ? (link_to 'Показать родителя', Rails.application.routes.url_helpers.send("admin_#{image.imageable_type.underscore}_path", image.imageable_id)) : "Не указано" %></td>
+<!--         <td><%# mim = remote_file_exists?(get_image_url request, image ) %>
+        <%# if mim %>
+          <div style="color:green">Да
+          <i class="fa fa-check" aria-hidden="true"></i>
+          </div>
+        <%# else %>
+          <div style="color:red">Нет
+          <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
+        <%# end %>
+        </td>
+         -->
+
+<!--       <%# [150, 180, 250, 370, 450, 570].each do |size| %>
+        <td>
+        <%# if remote_file_exists? (get_thumb_url request, image, size) %>
+          <div style="color:green">Да
+          <i class="fa fa-check" aria-hidden="true"></i>
+          </div>
+        <%# else %>
+          <div style="color:red">Нет
+          <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
+        <%# end %>
+        </td>
+      <%# end %> -->
+
+        <td><%= link_to 'Показать изображение', [:admin, image] %></td>
+        <td><%= link_to 'Редактировать', edit_admin_image_path(image) %></td>
+        <td><%= link_to 'Удалить', [:admin, image], method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Новое изображение', new_admin_image_path %>
+
+<p>Примечание:</p>
+
+<p>1. Миниатюра 370 используется в разделах на главной странице товаров.</p>
+
+<p>2. Миниатюра 250 используется в карусели "Новые поступления" внизу на главной странице товаров.</p>
+
+<p>3. Миниатюра 450 используется в карточке товара - как главное изображение.</p>
+
+<p>4. Миниатюра 150 используется в карточке товара - в карусели 2-х-рядной под главным изображением.</p>
+
+<p>5. Миниатюра 180 используется в карточке товара - в карусели "Рекомендуем" внизу.</p>
+
+<p>6. Миниатюра 570 используется в карточке товара - в окне увеличенного (по клику) изображении.</p>

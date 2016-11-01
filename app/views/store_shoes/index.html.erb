@@ -1,0 +1,52 @@
+<div class="row">  
+  <h2 class="sub-header"><%= @description %></h2>
+
+  <% if User.where(producer: true).size > 0 %>
+    <div class="row">
+      <div class="col-sm-3">
+        <%= link_to "По производителям", users_path, class:"btn green-button", style:"height: 40px;"%>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="bottom-margin"></div>
+
+  <div class="row col-centered">
+    <% @menu_category_values.each do |value| %>
+
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+        <div class="banner-static-inner">
+          <%#= link_to(image_tag("men1.jpg"), components_path(component_type_id: component_type.id)) %>
+          <a href="<%= shoes_path(:categories => {value.category_type_id => value.id }) %>" class="div_href"><div data-mode="&mdash; <%= value.title %> &mdash;" <%= value.image ? raw("style=\"background-image: url('#{value.image.file.thumb370.url}');\" class=\"image-blend-text\"") : raw("style=\"background-image: url('#{ image_path("no_image2_370.png")}');\" class=\"image-blend-text\"") %>></div></a>  
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>
+
+<h3 class="align-center">Новые поступления</h3>
+
+<div class="row">
+  <%= render :partial => "layouts/caroussel", locals: { list: @shoes, slides_to_show: 4, slider_image_width: 250, slider_width: 1200 } %>
+</div>
+
+<% if @articles.size > 0 %>
+  <h3 class="align-center">Фэшион-блог</h3> 
+<% end %>
+
+<div class="row placeholders">
+  <% @articles.each do |article| %>
+
+  <div class="col-xs-6 col-sm-3 leftalign box filters margin20">
+    <div style="height:190px">
+    <h5><%= article.title %></h5>
+    <% if article.tinymce_form_images_urls.size > 0 %>
+      <%= link_to(image_tag(article.tinymce_form_images_urls[0], width: '50', height: '50', style: "float:left; margin-right:1em"), admin_article_path(article.id)) %>
+    <% end %>
+    <small><%= article.thumb_text %></small>
+    </div>
+    <%= link_to("Далее »", admin_article_path(article.id), class:"btn btn-primary btn-xs keep_visited") %>
+  </div>
+  <% end %>
+</div>

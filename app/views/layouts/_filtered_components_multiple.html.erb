@@ -1,0 +1,84 @@
+<% if @component_type.component_category_types.size > 0 || @component_type.component_subtypes.size > 0 %>
+<div id="parent-navbar-main" >
+  <div class="filtered-panel" id="navbar-main">
+    <h4>Фильтры:</h4>
+  <!-- http://stackoverflow.com/questions/9596168/how-to-dynamically-call-routes-helper-in-rails         -->  
+    <%= form_tag components_path, method: "get", remote: true do %>
+      <% if @component_type.component_category_types.size > 0 %>
+
+        <% @filters.each do |filter| %>
+          <div class="filter-item">
+            <div class="filter-title">
+              <%= filter.title %>:
+            </div>
+
+            <% if filter.try(:has_sizerange) %>
+
+              <% list = filter.sizerange %>
+
+              <%= select_tag("size[]", options_for_select(list.collect {|p| [ p, p ] }, @size), {class: "filter-select", multiple: "multiple"}) %>
+
+            <% else %>
+
+              <% list = ComponentCategoryValue.includes(:component_category_type).where( component_category_type_id: filter.id ) %>
+
+              <%= select(:categories, filter.id, list.collect {|p| [ p.title, p.id ] }, { :selected => @categories ? @categories[filter.id.to_s] : false }, {class: "filter-select", multiple: "multiple"}) %>
+
+            <% end %>
+            
+          </div>
+
+          <script type="text/javascript">
+
+          $(function() {
+
+            $("<%= filter.try(:has_sizerange) ? "#size_" : ('#categories_' + filter.id.to_s) %>").multiselect({
+
+            nonSelectedText: 'Не выбрано',
+
+            buttonText: function(options, select) {
+                if (options.length === 0) {
+                    return 'Не выбрано';
+                }
+                if (options.length === 1) {
+                  return options.html();
+                }                
+                else if (options.length === <%= list.size %>) {
+                    return 'Всё выбрано (' + options.length + ")";
+                }                
+                else if (options.length > 1) {
+                    return options.length + ' выбрано';
+                }
+              }
+            });
+
+          });
+
+          </script>
+
+        <% end %>        
+
+        <%= hidden_field_tag :component_type_id, @component_type.id if @component_type%>
+
+      <% elsif @component_type.component_subtypes.size > 0 %>
+        <div class="filter-item">
+          <div class="">
+          <%= @component_type.title %>
+          </div>
+
+          <%= select_tag("component_subtype_id", options_from_collection_for_select(ComponentSubtype.includes(:component_type).where( component_type_id: @component_type.id ), :id, :title, @component_subtype_id), { include_blank: "Ничего не выбрано", class: "filter-select" }) %>
+
+          <%= hidden_field_tag :component_type_id, @component_type.id if @component_type%>
+        
+        </div>
+
+      <% end %>
+
+      <div>
+        <br>
+        <input type="submit" class="filter-input" value="Применить" />
+      </div>
+    <% end %>      
+  </div>
+</div>
+<% end %>

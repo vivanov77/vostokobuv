@@ -1,0 +1,33 @@
+<div id="parent-navbar-main" >
+  <div class="filters" id="navbar-main">
+
+  <% url_name ||= nil %>
+  <% path_param ||= nil %>
+  <% path_name ||= nil %>
+
+    <h4>Фильтры:</h4>
+  <!-- http://stackoverflow.com/questions/9596168/how-to-dynamically-call-routes-helper-in-rails         -->  
+    <%= form_tag url_name ? "#{url_name}" : 
+    (path_param ? 
+    Rails.application.routes.url_helpers.send(path_name, path_param) : 
+    Rails.application.routes.url_helpers.send(path_name)), method: "get" do %>
+
+      <% @filters.each do |filter| %>
+        <%= filter.title %>
+
+        <%= select("categories", filter.id, CategoryValue.includes(:category_type).where( category_type_id: filter.id ).collect {|p| [ p.title, p.id ] }, { include_blank: "Ничего не выбрано", :selected => @categories ? @categories[filter.id.to_s] : false }) %>
+
+      <% end %>
+
+      <% path_param = true if url_name %>
+
+      Производитель
+      <% if path_param %>: <%= @user.organization %>
+      <% else %>
+      <%= select_tag(:user_id, options_from_collection_for_select(User.where(producer: true).order(:organization), :id, :organization, @producer_id), { include_blank: "Ничего не выбрано"}) %> 
+      <% end %>   
+
+    <input type="submit" value="Применить" />
+    <% end %>      
+  </div>
+</div>

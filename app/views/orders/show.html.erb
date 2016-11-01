@@ -1,0 +1,27 @@
+<p>
+  <strong>Имя:</strong>
+  <%= @order.name %>
+</p>
+
+<p>
+  <strong>Город:</strong>
+  <%= @order.city %>
+</p>
+
+<p>
+  <strong>Электронная почта:</strong>
+  <%= @order.email %>
+</p>
+
+<p>
+  <strong>Телефон:</strong>
+  <%= @order.phone %>
+</p>
+
+<p>
+  <strong>Содержимое:</strong>
+  <%= @order.content %>
+</p>
+
+<!-- <%#= link_to 'Редактировать', edit_order_path(@order) %> | -->
+<%= link_to 'Назад', orders_path %>

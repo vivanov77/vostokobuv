@@ -1,0 +1,110 @@
+<%= form_for([:admin, @user]) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label "Электронная почта" %><br />
+    <%= f.email_field :email %>
+  </div>  
+  
+  <div class="field">
+    <%= f.label "Админ" %><br />
+    <%= f.check_box :admin %>
+  </div>
+  
+  <div class="blocked">
+    <%= f.label "Заблокирован" %><br />
+    <%= f.check_box :blocked %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Имя" %><br />
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Отчество" %><br />
+    <%= f.text_field :middle_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Фамилия" %><br />
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Организация" %><br />
+    <%= f.text_field :organization %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Город" %><br />
+    <%= f.text_field :city %>
+  </div> 
+
+  <div class="field">
+    <%= f.label "Адрес" %><br />
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Телефон" %><br />
+    <%= f.text_field :phone %>
+  </div>  
+
+  <div class="field">
+    <%= f.label "Производитель" %><br />
+    <%= f.check_box :producer %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Подписаться на новости об обуви" %><br />
+    <%= f.check_box :subscribe_news_shoes %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Подписаться на новости о товарах" %><br />
+    <%= f.check_box :subscribe_news_components %>
+  </div>  
+
+  <div class="field">
+    <%= f.label "Адрес сайта-визитки" %><br />
+    <%= f.text_field :url_name %>
+  </div>
+
+   <div class="field">
+    <%= f.label "Описание" %><br />
+    <%= f.text_field :description %>
+  </div>
+  
+  <div class="field">
+    <%= f.label "Контактное лицо" %><br />
+    <%= f.text_field :contact %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Информация о доставке" %><br />
+    <%= f.text_field :delivery_info %>
+  </div>  
+
+  <div class="field">
+    <%= f.label "Информация" %>
+    <%= f.text_field :info %>
+  </div>
+
+
+  <%= render 'layouts/uploaded_images', param: f %>  
+
+  <div class="actions">
+    <%= f.submit submit_russian_text "Пользователя" %>
+  </div>
+<% end %>
